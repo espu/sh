@@ -1,15 +1,15 @@
-#!/bin/bash
+i#!/bin/bash
 
 # 你需要配置Telegram Bot Token和Chat ID
-TELEGRAM_BOT_TOKEN="输入TG的机器人API"
-CHAT_ID="输入TG的接收通知的账号ID"
+TELEGRAM_BOT_TOKEN="7923415509:AAFGMZ39zNv7tO5VENXfIETUrR0VioBVMFA"
+CHAT_ID="834033113"
 
 
 # 你可以修改监控阈值设置
-CPU_THRESHOLD=70
+CPU_THRESHOLD=80
 MEMORY_THRESHOLD=70
-DISK_THRESHOLD=70
-NETWORK_THRESHOLD_GB=1000
+DISK_THRESHOLD=80
+NETWORK_THRESHOLD_GB=5000
 
 
 
@@ -69,7 +69,7 @@ check_and_notify() {
     local CURRENT_VALUE=$4
 
     if (( $(echo "$USAGE > $THRESHOLD" | bc -l) )); then
-        send_tg_notification "警告: ${isp_info}-${country}-${masked_ip} 的 $TYPE 使用率已达到 $USAGE%，超过阈值 $THRESHOLD%。"
+        send_tg_notification "警告Warning: ${isp_info}-${country}-${masked_ip} 的 $TYPE 使用率已達 $USAGE% Usage rate reached，超過閾值Usage rate has exceeded the $THRESHOLD%."
     fi
 }
 
@@ -82,17 +82,17 @@ while true; do
     TX_GB=$(get_tx_bytes)
 
     check_and_notify $CPU_USAGE "CPU" $CPU_THRESHOLD $CPU_USAGE
-    check_and_notify $MEMORY_USAGE "内存" $MEMORY_THRESHOLD $MEMORY_USAGE
-    check_and_notify $DISK_USAGE "硬盘" $DISK_THRESHOLD $DISK_USAGE
+    check_and_notify $MEMORY_USAGE "内存Memory" $MEMORY_THRESHOLD $MEMORY_USAGE
+    check_and_notify $DISK_USAGE "硬盘Disk" $DISK_THRESHOLD $DISK_USAGE
 
     # 检查入站流量是否超过阈值
     if (( $(echo "$RX_GB > $NETWORK_THRESHOLD_GB" | bc -l) )); then
-        send_tg_notification "警告: ${isp_info}-${country}-${masked_ip} 的入站流量已达到 ${RX_GB}GB，超过阈值 ${NETWORK_THRESHOLD_GB}GB。"
+        send_tg_notification "警告Warning: ${isp_info}-${country}-${masked_ip} 的入棧流量已達 ${RX_GB}GB(InBound Data Reached)，超过閾值Data has exceeded the ${NETWORK_THRESHOLD_GB}GB threshold."
     fi
 
     # 检查出站流量是否超过阈值
     if (( $(echo "$TX_GB > $NETWORK_THRESHOLD_GB" | bc -l) )); then
-        send_tg_notification "警告: ${isp_info}-${country}-${masked_ip} 的出站流量已达到 ${TX_GB}GB，超过阈值 ${NETWORK_THRESHOLD_GB}GB。"
+        send_tg_notification "警告Warning: ${isp_info}-${country}-${masked_ip} 的出棧流量已達 ${TX_GB}GB(OutBound Data Reached)，超過閾值Data has exceeded the ${NETWORK_THRESHOLD_GB}GB threshold."
     fi
 
     # 休眠5分钟
