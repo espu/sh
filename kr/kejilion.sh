@@ -57,7 +57,7 @@ CheckFirstRun_true() {
 
 
 
-# 기능 매장 지점 정보를 수집하는 기능, 현재 스크립트 버전 번호, 사용 시간, 시스템 버전, CPU 아키텍처, 기계 국가 및 사용자가 사용하는 기능 이름을 기록합니다. 그들은 절대적으로 민감한 정보를 포함하지 않습니다. 제발 나를 믿으세요!
+# 기능 매장 지점 정보를 수집하는 기능, 현재 스크립트 버전 번호, 사용 시간, 시스템 버전, CPU 아키텍처, 컴퓨터 국가 및 사용자가 사용하는 기능 이름을 기록합니다. 그들은 절대적으로 민감한 정보를 포함하지 않습니다. 제발 나를 믿으세요!
 # 이 기능을 설계 해야하는 이유는 무엇입니까? 목적은 사용자가 사용하는 기능을 더 잘 이해하고 기능을 더욱 최적화하여 사용자 요구를 충족시키는 더 많은 기능을 시작하는 것입니다.
 # 전체 텍스트의 경우 Send_Stats 기능 호출 위치, 투명 및 오픈 소스를 검색 할 수 있으며 우려 사항이 있으면 사용을 거부 할 수 있습니다.
 
@@ -1141,7 +1141,7 @@ iptables_panel() {
 
 			  5)
 				  # IP 화이트리스트
-				  read -e -p "릴리스하려면 IP 또는 IP 세그먼트를 입력하십시오." o_ip
+				  read -e -p "해제 할 IP 또는 IP 세그먼트를 입력하십시오." o_ip
 				  allow_ip $o_ip
 				  ;;
 			  6)
@@ -1512,7 +1512,7 @@ fi
 
 add_yuming() {
 	  ip_address
-	  echo -e "먼저 도메인 이름을 로컬 IP로 해결합니다.${gl_huang}$ipv4_address  $ipv6_address${gl_bai}"
+	  echo -e "먼저 도메인 이름을 기본 IP로 해결합니다.${gl_huang}$ipv4_address  $ipv6_address${gl_bai}"
 	  read -e -p "IP 또는 해결 된 도메인 이름을 입력하십시오." yuming
 }
 
@@ -2073,7 +2073,7 @@ web_security() {
 
 				  22)
 					  send_stats "5 초 방패의 높은 하중"
-					  echo -e "${gl_huang}웹 사이트는 5 분마다 자동으로 감지됩니다. 높은 부하가 감지되면 방패가 자동으로 켜지고 5 초 동안 낮은 부하가 자동으로 꺼집니다.${gl_bai}"
+					  echo -e "${gl_huang}웹 사이트는 5 분마다 자동으로 감지됩니다. 높은 하중의 감지에 도달하면 방패가 자동으로 켜지고 낮은 부하가 자동으로 5 초 동안 꺼집니다.${gl_bai}"
 					  echo "--------------"
 					  echo "CF 매개 변수 가져 오기 :"
 					  echo -e "CF 배경의 오른쪽 상단 모서리로 이동하여 왼쪽의 API 토큰을 선택하고 얻습니다.${gl_huang}Global API Key${gl_bai}"
@@ -3857,7 +3857,7 @@ frps_panel() {
 
 			8)
 				send_stats "IP 액세스를 차단하십시오"
-				echo "반세기 도메인 이름에 액세스 한 경우이 기능을 사용하여 IP+ 포트 액세스를 차단할 수 있습니다."
+				echo "반세기 도메인 이름에 액세스 한 경우이 기능을 사용하여 IP+ 포트 액세스를 차단하십시오."
 				read -e -p "차단 해야하는 포트를 입력하십시오." frps_port
 				block_host_port "$frps_port" "$ipv4_address"
 				;;
@@ -4884,7 +4884,7 @@ elrepo_install() {
 		linux_Settings
 	fi
 	# 감지 된 운영 체제 정보를 인쇄합니다
-	echo "운영 체제 감지 :$os_name $os_version"
+	echo "감지 된 운영 체제 :$os_name $os_version"
 	# 시스템 버전에 따라 해당 Elrepo 창고 구성을 설치하십시오.
 	if [[ "$os_version" == 8 ]]; then
 		echo "Elrepo 저장소 구성 (버전 8)을 설치하십시오 ..."
@@ -5710,7 +5710,7 @@ list_connections() {
 # 새 연결을 추가하십시오
 add_connection() {
 	send_stats "새 연결을 추가하십시오"
-	echo "새 연결을 만드는 예 :"
+	echo "새 연결 예제 :"
 	echo "- 연결 이름 : my_server"
 	echo "-IP 주소 : 192.168.1.100"
 	echo "- 사용자 이름 : 루트"
@@ -7115,7 +7115,7 @@ linux_test() {
 			  echo "베이징 유니폼 : 202.106.50.1"
 			  echo "베이징 모바일 : 221.179.155.161"
 			  echo "상하이 통신 : 202.96.209.133"
-			  echo "상하이 유니폼 : 210.22.97.1"
+			  echo "上海联通: 210.22.97.1"
 			  echo "상하이 모바일 : 211.136.112.200"
 			  echo "광저우 통신 : 58.60.188.222"
 			  echo "광저우 유니폼 : 210.21.196.6"
@@ -10776,7 +10776,7 @@ linux_Settings() {
 	  echo -e "${gl_kjlan}17.  ${gl_bai}방화벽 고급 관리자${gl_kjlan}18.  ${gl_bai}호스트 이름을 수정하십시오"
 	  echo -e "${gl_kjlan}19.  ${gl_bai}스위치 시스템 업데이트 소스${gl_kjlan}20.  ${gl_bai}타이밍 작업 관리"
 	  echo -e "${gl_kjlan}------------------------"
-	  echo -e "${gl_kjlan}21.  ${gl_bai}기본 호스트 구문 분석${gl_kjlan}22.  ${gl_bai}SSH 방어 프로그램"
+	  echo -e "${gl_kjlan}21.  ${gl_bai}기본 호스트 분석${gl_kjlan}22.  ${gl_bai}SSH 방어 프로그램"
 	  echo -e "${gl_kjlan}23.  ${gl_bai}현재 한도의 자동 종료${gl_kjlan}24.  ${gl_bai}루트 비공개 키 로그인 모드"
 	  echo -e "${gl_kjlan}25.  ${gl_bai}TG-BOT 시스템 모니터링 및 조기 경고${gl_kjlan}26.  ${gl_bai}OpenSsh 고위험 취약점 수정 (Xiuyuan)"
 	  echo -e "${gl_kjlan}27.  ${gl_bai}Red Hat Linux 커널 업그레이드${gl_kjlan}28.  ${gl_bai}Linux 시스템에서 커널 매개 변수의 최적화${gl_huang}★${gl_bai}"
@@ -10806,7 +10806,7 @@ linux_Settings() {
 				  fi
 				  find /usr/local/bin/ -type l -exec bash -c 'test "$(readlink -f {})" = "/usr/local/bin/k" && rm -f {}' \;
 				  ln -s /usr/local/bin/k /usr/local/bin/$kuaijiejian
-				  echo "바로 가기 키가 설정되어 있습니다"
+				  echo "바로 가기 키가 설정되었습니다"
 				  send_stats "스크립트 바로 가기 키가 설정되었습니다"
 				  break_end
 				  linux_Settings
@@ -12121,7 +12121,7 @@ linux_file() {
 
 				# -r 옵션을 사용하여 디렉토리를 재귀 적으로 복사하십시오
 				cp -r "$src_path" "$dest_path" && echo "파일 또는 디렉토리가 복사되었습니다$dest_path" || echo "파일이나 디렉토리를 복사하지 못했습니다"
-				send_stats "파일 또는 디렉토리를 복사하십시오"
+				send_stats "파일 또는 디렉토리를 복사합니다"
 				;;
 
 
