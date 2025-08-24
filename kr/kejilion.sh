@@ -57,7 +57,7 @@ CheckFirstRun_true() {
 
 
 
-# 기능 매장 지점 정보를 수집하는 기능, 현재 스크립트 버전 번호, 사용 시간, 시스템 버전, CPU 아키텍처, 기계 국가 및 사용자가 사용하는 기능 이름을 기록합니다. 그들은 절대적으로 민감한 정보를 포함하지 않습니다. 제발 나를 믿으세요!
+# 기능 매장 지점 정보를 수집하는 기능, 현재 스크립트 버전 번호, 사용 시간, 시스템 버전, CPU 아키텍처, 컴퓨터 국가 및 사용자가 사용하는 기능 이름을 기록합니다. 그들은 절대적으로 민감한 정보를 포함하지 않습니다. 제발 나를 믿으세요!
 # 이 기능을 설계 해야하는 이유는 무엇입니까? 목적은 사용자가 사용하는 기능을 더 잘 이해하고 기능을 더욱 최적화하여 사용자 요구를 충족시키는 더 많은 기능을 시작하는 것입니다.
 # 전체 텍스트의 경우 Send_Stats 기능 호출 위치, 투명 및 오픈 소스를 검색 할 수 있으며 우려 사항이 있으면 사용을 거부 할 수 있습니다.
 
@@ -1487,7 +1487,7 @@ certs_status() {
 		echo -e "1. 도메인 이름 철자 오류 ➠ 도메인 이름이 올바르게 입력되었는지 확인하십시오."
 		echo -e "2. DNS 해상도 문제 ➠ 도메인 이름 이이 서버 IP로 올바르게 해결되었는지 확인합니다."
 		echo -e "3. 네트워크 구성 문제 ➠ CloudFlare Warp 및 기타 가상 네트워크를 사용하는 경우 임시로 종료하십시오."
-		echo -e "4. 防火墙限制 ➠ 检查80/443端口是否开放，确保验证可访问"
+		echo -e "4. 방화벽 제한 ➠ 검증에 액세스 할 수 있도록 포트 80/443이 열려 있는지 확인"
 		echo -e "5. 응용 프로그램 수는 한계를 초과합니다. ➠ 암호화하자는 주간 제한 (5 배/도메인 이름/주)을 갖습니다."
 		echo -e "6. 국내 등록 제한 ➠ 도메인 이름이 중국 본토에 등록되어 있는지 확인하십시오."
 		break_end
@@ -5026,7 +5026,7 @@ clamav_scan() {
 		clamscan -r --log=/var/log/clamav/scan.log $SCAN_PARAMS
 
 	echo -e "${gl_lv}$@ scan이 완료되고 바이러스 보고서가 저장됩니다${gl_huang}/home/docker/clamav/log/scan.log${gl_bai}"
-	echo -e "${gl_lv}바이러스가 있다면 제발${gl_huang}scan.log${gl_lv}파일에서 찾은 키워드를 검색하여 바이러스의 위치를 확인하십시오.${gl_bai}"
+	echo -e "${gl_lv}바이러스가 있다면 제발${gl_huang}scan.log${gl_lv}파일에서 찾은 키워드를 검색하여 바이러스의 위치를 ​​확인하십시오.${gl_bai}"
 
 }
 
@@ -5341,7 +5341,7 @@ update_locale() {
 				locale-gen
 				echo "LANG=${lang}" > /etc/default/locale
 				export LANG=${lang}
-				echo -e "${gl_lv}시스템 언어는 다음으로 수정되었습니다.$langSSH를 다시 연결하면 적용됩니다.${gl_bai}"
+				echo -e "${gl_lv}시스템 언어는 다음으로 수정되었습니다.$langSSH를 다시 ​​연결하면 적용됩니다.${gl_bai}"
 				hash -r
 				break_end
 
@@ -5350,7 +5350,7 @@ update_locale() {
 				install glibc-langpack-zh
 				localectl set-locale LANG=${lang}
 				echo "LANG=${lang}" | tee /etc/locale.conf
-				echo -e "${gl_lv}시스템 언어는 다음으로 수정되었습니다.$langSSH를 다시 연결하면 적용됩니다.${gl_bai}"
+				echo -e "${gl_lv}시스템 언어는 다음으로 수정되었습니다.$langSSH를 다시 ​​연결하면 적용됩니다.${gl_bai}"
 				hash -r
 				break_end
 				;;
@@ -5414,7 +5414,7 @@ else
 	echo "${bianse}" >> ~/.profile
 	# source ~/.profile
 fi
-echo -e "${gl_lv}변경이 완료되었습니다. 변경 사항을 볼 수 있도록 SSH를 다시 연결하십시오!${gl_bai}"
+echo -e "${gl_lv}변경이 완료되었습니다. 변경 사항을 볼 수 있도록 SSH를 다시 ​​연결하십시오!${gl_bai}"
 
 hash -r
 break_end
@@ -7474,7 +7474,7 @@ linux_ldnmp() {
 	  clear
 	  # Kedao 클라우드 데스크탑
 	  webname="可道云桌面"
-	  send_stats "설치$webname"
+	  send_stats "설치하다$webname"
 	  echo "배포를 시작하십시오$webname"
 	  add_yuming
 	  repeat_add_yuming

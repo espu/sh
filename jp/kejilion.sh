@@ -1623,7 +1623,7 @@ cf_purge_cache() {
 	if [[ "$answer" == "y" ]]; then
 	  echo "CF情報が保存されます$CONFIG_FILE、後でCF情報を変更できます"
 	  read -e -p "API_TOKENを入力してください：" API_TOKEN
-	  read -e -p "CFユーザー名を入力してください：" EMAIL
+	  read -e -p "CFユーザ​​ー名を入力してください：" EMAIL
 	  read -e -p "ゾーン_id（スペースで区切られた複数）を入力してください。" -a ZONE_IDS
 
 	  mkdir -p /home/web/config/
@@ -5774,7 +5774,7 @@ delete_connection() {
 
 	local connection=$(sed -n "${num}p" "$CONFIG_FILE")
 	if [[ -z "$connection" ]]; then
-		echo "エラー：対応する接続は見つかりませんでした。"
+		echo "エラー：対応する接続​​は見つかりませんでした。"
 		return
 	fi
 
@@ -5796,7 +5796,7 @@ use_connection() {
 
 	local connection=$(sed -n "${num}p" "$CONFIG_FILE")
 	if [[ -z "$connection" ]]; then
-		echo "エラー：対応する接続は見つかりませんでした。"
+		echo "エラー：対応する接続​​は見つかりませんでした。"
 		return
 	fi
 
@@ -5815,7 +5815,7 @@ use_connection() {
 	else
 		# パスワードで接続します
 		if ! command -v sshpass &> /dev/null; then
-			echo "エラー：SSHPassはインストールされていません。最初にSSHPassをインストールしてください。"
+			echo "错误：未安装 sshpass，请先安装 sshpass。"
 			echo "インストール方法："
 			echo "  - Ubuntu/Debian: apt install sshpass"
 			echo "  - CentOS/RHEL: yum install sshpass"
@@ -6116,21 +6116,21 @@ add_task() {
 	echo "同期モードを選択してください："
 	echo "1。標準モード（-AVZ）"
 	echo "2。ターゲットファイル（-avz  -  delete）を削除します"
-	read -e -p "（1/2）を選択してください：" mode
+	read -e -p "请选择 (1/2): " mode
 	case $mode in
 		1) options="-avz" ;;
 		2) options="-avz --delete" ;;
-		*) echo "無効な選択、デフォルト-AVZを使用します"; options="-avz" ;;
+		*) echo "无效选择，使用默认 -avz"; options="-avz" ;;
 	esac
 
 	echo "$name|$local_path|$remote|$remote_path|$port|$options|$auth_method|$password_or_key" >> "$CONFIG_FILE"
 
 	install rsync rsync
 
-	echo "タスクが節約されました！"
+	echo "任务已保存!"
 }
 
-# タスクを削除します
+# 删除任务
 delete_task() {
 	send_stats "同期タスクを削除します"
 	read -e -p "削除するには、タスク番号を入力してください。" num
@@ -11234,7 +11234,7 @@ EOF
 
 				# タイムゾーンと時間を表示します
 				echo "現在のシステムタイムゾーン：$timezone"
-				echo "当前系统时间：$current_time"
+				echo "現在のシステム時間：$current_time"
 
 				echo ""
 				echo "タイムゾーンの切り替え"
@@ -11243,8 +11243,8 @@ EOF
 				echo "1。中国の上海時間2。中国の香港時間"
 				echo "3。日本の東京時間4。韓国のソウル時間"
 				echo "5。シンガポール時間6。インドのコルカタ時間"
-				echo "7.  阿联酋迪拜时间           8.  澳大利亚悉尼时间"
-				echo "9.  泰国曼谷时间"
+				echo "7。アラブ首長国連邦のドバイ時間8。オーストラリアのシドニー時間"
+				echo "9。タイのバンコクでの時間"
 				echo "------------------------"
 				echo "ヨーロッパ"
 				echo "11。英国のロンドン時間12。パリの時間フランスの時間"
