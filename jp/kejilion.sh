@@ -1512,7 +1512,7 @@ fi
 
 add_yuming() {
 	  ip_address
-	  echo -e "最初にドメイン名をローカルIPに解決します。${gl_huang}$ipv4_address  $ipv6_address${gl_bai}"
+	  echo -e "最初にドメイン名をネイティブIPに解決します。${gl_huang}$ipv4_address  $ipv6_address${gl_bai}"
 	  read -e -p "IPまたは解決されたドメイン名を入力してください：" yuming
 }
 
@@ -5815,7 +5815,7 @@ use_connection() {
 	else
 		# パスワードで接続します
 		if ! command -v sshpass &> /dev/null; then
-			echo "错误：未安装 sshpass，请先安装 sshpass。"
+			echo "エラー：SSHPassはインストールされていません。最初にSSHPassをインストールしてください。"
 			echo "インストール方法："
 			echo "  - Ubuntu/Debian: apt install sshpass"
 			echo "  - CentOS/RHEL: yum install sshpass"
@@ -6116,21 +6116,21 @@ add_task() {
 	echo "同期モードを選択してください："
 	echo "1。標準モード（-AVZ）"
 	echo "2。ターゲットファイル（-avz  -  delete）を削除します"
-	read -e -p "请选择 (1/2): " mode
+	read -e -p "（1/2）を選択してください：" mode
 	case $mode in
 		1) options="-avz" ;;
 		2) options="-avz --delete" ;;
-		*) echo "无效选择，使用默认 -avz"; options="-avz" ;;
+		*) echo "無効な選択、デフォルト-AVZを使用します"; options="-avz" ;;
 	esac
 
 	echo "$name|$local_path|$remote|$remote_path|$port|$options|$auth_method|$password_or_key" >> "$CONFIG_FILE"
 
 	install rsync rsync
 
-	echo "任务已保存!"
+	echo "タスクが節約されました！"
 }
 
-# 删除任务
+# タスクを削除します
 delete_task() {
 	send_stats "同期タスクを削除します"
 	read -e -p "削除するには、タスク番号を入力してください。" num
@@ -7585,7 +7585,7 @@ linux_ldnmp() {
 	  echo "Redisポート：6379"
 	  echo ""
 	  echo "ウェブサイトURL：https：//$yuming"
-	  echo "バックグラウンドログインパス： /admin"
+	  echo "バックエンドログインパス： /admin"
 	  echo "------------------------"
 	  echo "ユーザー名：admin"
 	  echo "パスワード：管理者"
@@ -10761,7 +10761,7 @@ linux_Settings() {
 
 	while true; do
 	  clear
-	  # send_stats「システムツール」
+	  # send_stats "系统工具"
 	  echo -e "システムツール"
 	  echo -e "${gl_kjlan}------------------------"
 	  echo -e "${gl_kjlan}1.   ${gl_bai}スクリプトの起動ショートカットキーを設定します${gl_kjlan}2.   ${gl_bai}ログインパスワードを変更します"
@@ -11916,7 +11916,7 @@ EOF
 					  sed -i 's/^ENABLE_STATS="false"/ENABLE_STATS="true"/' /usr/local/bin/k
 					  sed -i 's/^ENABLE_STATS="false"/ENABLE_STATS="true"/' ~/kejilion.sh
 					  echo "コレクションが有効になっています"
-					  send_stats "プライバシーとセキュリティコレクションが有効になっています"
+					  send_stats "プライバシーとセキュリティが収集のために有効になっています"
 					  ;;
 				  2)
 					  cd ~

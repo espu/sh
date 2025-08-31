@@ -1512,7 +1512,7 @@ fi
 
 add_yuming() {
 	  ip_address
-	  echo -e "First resolve the domain name to the local IP:${gl_huang}$ipv4_address  $ipv6_address${gl_bai}"
+	  echo -e "First resolve the domain name to the native IP:${gl_huang}$ipv4_address  $ipv6_address${gl_bai}"
 	  read -e -p "Please enter your IP or the resolved domain name:" yuming
 }
 
@@ -5025,7 +5025,7 @@ clamav_scan() {
 		clamav/clamav-debian:latest \
 		clamscan -r --log=/var/log/clamav/scan.log $SCAN_PARAMS
 
-	echo -e "${gl_lv}$@ Scan is completed, virus report is stored${gl_huang}/home/docker/clamav/log/scan.log${gl_bai}"
+	echo -e "${gl_lv}$@ Scan is completed, virus report is stored in${gl_huang}/home/docker/clamav/log/scan.log${gl_bai}"
 	echo -e "${gl_lv}If there is a virus, please${gl_huang}scan.log${gl_lv}Search for FOUND keyword in the file to confirm the location of the virus${gl_bai}"
 
 }
@@ -5851,7 +5851,7 @@ ssh_manager() {
 	while true; do
 		clear
 		echo "SSH Remote Connection Tool"
-		echo "Can connect to other Linux systems via SSH"
+		echo "Can be connected to other Linux systems via SSH"
 		echo "------------------------"
 		list_connections
 		echo "1. Create a new connection 2. Use a connection 3. Delete a connection"
@@ -7409,7 +7409,7 @@ linux_ldnmp() {
 	echo -e "${gl_huang}------------------------"
 	echo -e "${gl_huang}21.  ${gl_bai}Install nginx only${gl_huang}★${gl_bai}                     ${gl_huang}22.  ${gl_bai}Site redirection"
 	echo -e "${gl_huang}23.  ${gl_bai}Site reverse proxy-IP+port${gl_huang}★${gl_bai}            ${gl_huang}24.  ${gl_bai}Site reverse proxy - domain name"
-	echo -e "${gl_huang}25.  ${gl_bai}Install Bitwarden password management platform${gl_huang}26.  ${gl_bai}Install Halo Blog Website"
+	echo -e "${gl_huang}25.  ${gl_bai}Install the Bitwarden password management platform${gl_huang}26.  ${gl_bai}Install Halo Blog Website"
 	echo -e "${gl_huang}27.  ${gl_bai}Install AI Painting Prompt Word Generator${gl_huang}28.  ${gl_bai}Site reverse proxy-load balancing"
 	echo -e "${gl_huang}30.  ${gl_bai}Customize static site"
 	echo -e "${gl_huang}------------------------"
@@ -7585,7 +7585,7 @@ linux_ldnmp() {
 	  echo "Redis port: 6379"
 	  echo ""
 	  echo "Website url: https://$yuming"
-	  echo "Background login path: /admin"
+	  echo "Backend login path: /admin"
 	  echo "------------------------"
 	  echo "Username: admin"
 	  echo "Password: admin"
@@ -8382,7 +8382,7 @@ linux_panel() {
 	  echo -e "${gl_kjlan}53.  ${gl_bai}llama3 chat AI model${gl_kjlan}54.  ${gl_bai}AMH Host Website Building Management Panel"
 	  echo -e "${gl_kjlan}55.  ${gl_bai}FRP intranet penetration (server side)${gl_huang}★${gl_bai}	         ${gl_kjlan}56.  ${gl_bai}FRP intranet penetration (client)${gl_huang}★${gl_bai}"
 	  echo -e "${gl_kjlan}57.  ${gl_bai}Deepseek chat AI big model${gl_kjlan}58.  ${gl_bai}Dify big model knowledge base${gl_huang}★${gl_bai}"
-	  echo -e "${gl_kjlan}59.  ${gl_bai}NewAPI big model asset management${gl_kjlan}60.  ${gl_bai}JumpServer open source bastion machine"
+	  echo -e "${gl_kjlan}59.  ${gl_bai}NewAPI Big Model Asset Management${gl_kjlan}60.  ${gl_bai}JumpServer open source bastion machine"
 	  echo -e "${gl_kjlan}------------------------"
 	  echo -e "${gl_kjlan}61.  ${gl_bai}Online translation server${gl_kjlan}62.  ${gl_bai}RAGFlow big model knowledge base"
 	  echo -e "${gl_kjlan}63.  ${gl_bai}OpenWebUI self-hosted AI platform${gl_huang}★${gl_bai}             ${gl_kjlan}64.  ${gl_bai}it-tools toolbox"
@@ -10806,7 +10806,7 @@ linux_Settings() {
 				  fi
 				  find /usr/local/bin/ -type l -exec bash -c 'test "$(readlink -f {})" = "/usr/local/bin/k" && rm -f {}' \;
 				  ln -s /usr/local/bin/k /usr/local/bin/$kuaijiejian
-				  echo "Shortcut keys are set"
+				  echo "Shortcut keys have been set"
 				  send_stats "Script shortcut keys have been set"
 				  break_end
 				  linux_Settings
@@ -11805,7 +11805,7 @@ EOF
 			  echo -e "6. Turn on${gl_huang}BBR${gl_bai}accelerate"
 			  echo -e "7. Set the time zone to${gl_huang}Shanghai${gl_bai}"
 			  echo -e "8. Automatically optimize DNS address${gl_huang}Overseas: 1.1.1.1 8.8.8.8 Domestic: 223.5.5.5${gl_bai}"
-			  echo -e "9. Install the basic tools${gl_huang}docker wget sudo tar unzip socat btop nano vim${gl_bai}"
+			  echo -e "9. Install basic tools${gl_huang}docker wget sudo tar unzip socat btop nano vim${gl_bai}"
 			  echo -e "10. Switch to kernel parameter optimization in Linux system${gl_huang}Balanced optimization mode${gl_bai}"
 			  echo "------------------------------------------------"
 			  read -e -p "Are you sure to have one-click maintenance? (Y/N):" choice
@@ -11900,7 +11900,7 @@ EOF
 
 			  echo "Privacy and Security"
 			  echo "The script will collect data on user functions, optimize the script experience, and create more fun and useful functions."
-			  echo "Will collect the script version number, usage time, system version, CPU architecture, country of the machine and the name of the functions used,"
+			  echo "Will collect the script version number, usage time, system version, CPU architecture, country of the machine and the name of the function used,"
 			  echo "------------------------------------------------"
 			  echo -e "Current status:$status_message"
 			  echo "--------------------"
@@ -11916,7 +11916,7 @@ EOF
 					  sed -i 's/^ENABLE_STATS="false"/ENABLE_STATS="true"/' /usr/local/bin/k
 					  sed -i 's/^ENABLE_STATS="false"/ENABLE_STATS="true"/' ~/kejilion.sh
 					  echo "Collection has been enabled"
-					  send_stats "Privacy and security collection has been enabled"
+					  send_stats "Privacy and security have been enabled for collection"
 					  ;;
 				  2)
 					  cd ~
