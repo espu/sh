@@ -5025,7 +5025,7 @@ clamav_scan() {
 		clamav/clamav-debian:latest \
 		clamscan -r --log=/var/log/clamav/scan.log $SCAN_PARAMS
 
-	echo -e "${gl_lv}$@ Scan is completed, virus report is stored in${gl_huang}/home/docker/clamav/log/scan.log${gl_bai}"
+	echo -e "${gl_lv}$@ Scan is completed, virus report is stored${gl_huang}/home/docker/clamav/log/scan.log${gl_bai}"
 	echo -e "${gl_lv}If there is a virus, please${gl_huang}scan.log${gl_lv}Search for FOUND keyword in the file to confirm the location of the virus${gl_bai}"
 
 }
@@ -7409,7 +7409,7 @@ linux_ldnmp() {
 	echo -e "${gl_huang}------------------------"
 	echo -e "${gl_huang}21.  ${gl_bai}Install nginx only${gl_huang}★${gl_bai}                     ${gl_huang}22.  ${gl_bai}Site redirection"
 	echo -e "${gl_huang}23.  ${gl_bai}Site reverse proxy-IP+port${gl_huang}★${gl_bai}            ${gl_huang}24.  ${gl_bai}Site reverse proxy - domain name"
-	echo -e "${gl_huang}25.  ${gl_bai}Install the Bitwarden password management platform${gl_huang}26.  ${gl_bai}Install Halo Blog Website"
+	echo -e "${gl_huang}25.  ${gl_bai}Install Bitwarden password management platform${gl_huang}26.  ${gl_bai}Install Halo Blog Website"
 	echo -e "${gl_huang}27.  ${gl_bai}Install AI Painting Prompt Word Generator${gl_huang}28.  ${gl_bai}Site reverse proxy-load balancing"
 	echo -e "${gl_huang}30.  ${gl_bai}Customize static site"
 	echo -e "${gl_huang}------------------------"
@@ -7585,7 +7585,7 @@ linux_ldnmp() {
 	  echo "Redis port: 6379"
 	  echo ""
 	  echo "Website url: https://$yuming"
-	  echo "Backend login path: /admin"
+	  echo "Background login path: /admin"
 	  echo "------------------------"
 	  echo "Username: admin"
 	  echo "Password: admin"
@@ -10806,7 +10806,7 @@ linux_Settings() {
 				  fi
 				  find /usr/local/bin/ -type l -exec bash -c 'test "$(readlink -f {})" = "/usr/local/bin/k" && rm -f {}' \;
 				  ln -s /usr/local/bin/k /usr/local/bin/$kuaijiejian
-				  echo "Shortcut keys have been set"
+				  echo "Shortcut keys are set"
 				  send_stats "Script shortcut keys have been set"
 				  break_end
 				  linux_Settings
@@ -11415,7 +11415,7 @@ EOF
 								  (crontab -l ; echo "0 0 * * $weekday $newquest") | crontab - > /dev/null 2>&1
 								  ;;
 							  3)
-								  read -e -p "Choose what time to perform tasks every day? (Hours, 0-23):" hour
+								  read -e -p "Choose when to perform tasks every day? (Hours, 0-23):" hour
 								  (crontab -l ; echo "0 $hour * * * $newquest") | crontab - > /dev/null 2>&1
 								  ;;
 							  4)
@@ -11805,7 +11805,7 @@ EOF
 			  echo -e "6. Turn on${gl_huang}BBR${gl_bai}accelerate"
 			  echo -e "7. Set the time zone to${gl_huang}Shanghai${gl_bai}"
 			  echo -e "8. Automatically optimize DNS address${gl_huang}Overseas: 1.1.1.1 8.8.8.8 Domestic: 223.5.5.5${gl_bai}"
-			  echo -e "9. Install basic tools${gl_huang}docker wget sudo tar unzip socat btop nano vim${gl_bai}"
+			  echo -e "9. Install the basic tools${gl_huang}docker wget sudo tar unzip socat btop nano vim${gl_bai}"
 			  echo -e "10. Switch to kernel parameter optimization in Linux system${gl_huang}Balanced optimization mode${gl_bai}"
 			  echo "------------------------------------------------"
 			  read -e -p "Are you sure to have one-click maintenance? (Y/N):" choice

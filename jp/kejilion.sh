@@ -7585,7 +7585,7 @@ linux_ldnmp() {
 	  echo "Redisポート：6379"
 	  echo ""
 	  echo "ウェブサイトURL：https：//$yuming"
-	  echo "バックエンドログインパス： /admin"
+	  echo "バックグラウンドログインパス： /admin"
 	  echo "------------------------"
 	  echo "ユーザー名：admin"
 	  echo "パスワード：管理者"
@@ -10761,7 +10761,7 @@ linux_Settings() {
 
 	while true; do
 	  clear
-	  # send_stats "系统工具"
+	  # send_stats「システムツール」
 	  echo -e "システムツール"
 	  echo -e "${gl_kjlan}------------------------"
 	  echo -e "${gl_kjlan}1.   ${gl_bai}スクリプトの起動ショートカットキーを設定します${gl_kjlan}2.   ${gl_bai}ログインパスワードを変更します"
@@ -11415,7 +11415,7 @@ EOF
 								  (crontab -l ; echo "0 0 * * $weekday $newquest") | crontab - > /dev/null 2>&1
 								  ;;
 							  3)
-								  read -e -p "毎日タスクを実行する時間を選択しますか？ （時間、0-23）：" hour
+								  read -e -p "毎日タスクを実行する時期を選択しますか？ （時間、0-23）：" hour
 								  (crontab -l ; echo "0 $hour * * * $newquest") | crontab - > /dev/null 2>&1
 								  ;;
 							  4)
@@ -11900,7 +11900,7 @@ EOF
 
 			  echo "プライバシーとセキュリティ"
 			  echo "スクリプトは、ユーザー機能に関するデータを収集し、スクリプトエクスペリエンスを最適化し、より楽しく便利な機能を作成します。"
-			  echo "スクリプトバージョン番号、使用時間、システムバージョン、CPUアーキテクチャ、マシンの国、使用される機能の名前を収集します。"
+			  echo "スクリプトバージョン番号、使用時間、システムバージョン、CPUアーキテクチャ、マシンの国、および使用される関数の名前を収集します。"
 			  echo "------------------------------------------------"
 			  echo -e "現在のステータス：$status_message"
 			  echo "--------------------"
