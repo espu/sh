@@ -11916,7 +11916,7 @@ EOF
 					  sed -i 's/^ENABLE_STATS="false"/ENABLE_STATS="true"/' /usr/local/bin/k
 					  sed -i 's/^ENABLE_STATS="false"/ENABLE_STATS="true"/' ~/kejilion.sh
 					  echo "コレクションが有効になっています"
-					  send_stats "プライバシーとセキュリティが収集のために有効になっています"
+					  send_stats "プライバシーとセキュリティコレクションが有効になっています"
 					  ;;
 				  2)
 					  cd ~
