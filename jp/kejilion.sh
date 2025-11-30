@@ -844,7 +844,7 @@ open_port() {
 
 		if ! iptables -C INPUT -p udp --dport $port -j ACCEPT 2>/dev/null; then
 			iptables -I INPUT 1 -p udp --dport $port -j ACCEPT
-			echo "ポートがオープンしました$port"
+			echo "ポートがオープンされました$port"
 		fi
 	done
 
@@ -4418,7 +4418,7 @@ echo -e "${gl_lv}ROOTログインの設定は完了です！${gl_bai}"
 
 root_use() {
 clear
-[ "$EUID" -ne 0 ] && echo -e "${gl_huang}ヒント：${gl_bai}この機能を実行するには root ユーザーが必要です。" && break_end && kejilion
+[ "$EUID" -ne 0 ] && echo -e "${gl_huang}ヒント：${gl_bai}この機能を使用するには、root ユーザーが実行する必要があります。" && break_end && kejilion
 }
 
 
@@ -5554,9 +5554,9 @@ linux_trash() {
 
 
 
-# バックアップの作成
+# バックアップを作成する
 create_backup() {
-	send_stats "バックアップの作成"
+	send_stats "バックアップを作成する"
 	local TIMESTAMP=$(date +"%Y%m%d%H%M%S")
 
 	# ユーザーにバックアップ ディレクトリの入力を求めるプロンプトを表示する
@@ -5598,7 +5598,7 @@ create_backup() {
 		echo "- $path"
 	done
 
-	# バックアップの作成
+	# バックアップを作成する
 	echo "バックアップの作成$BACKUP_NAME..."
 	install tar
 	tar -czvf "$BACKUP_DIR/$BACKUP_NAME" "${BACKUP_PATHS[@]}"
@@ -6019,7 +6019,7 @@ disk_manager() {
 	send_stats "ハードディスク管理機能"
 	while true; do
 		clear
-		echo "ハードドライブのパーティション管理"
+		echo "ハードディスクのパーティション管理"
 		echo -e "${gl_huang}この機能は内部テスト中であるため、運用環境では使用しないでください。${gl_bai}"
 		echo "------------------------"
 		list_partitions
@@ -6437,7 +6437,7 @@ linux_tools() {
 
   while true; do
 	  clear
-	  # send_stats 「基本ツール」
+	  # send_stats "基本ツール"
 	  echo -e "基本的なツール"
 	  echo -e "${gl_kjlan}------------------------"
 	  echo -e "${gl_kjlan}1.   ${gl_bai}カールダウンロードツール${gl_huang}★${gl_bai}                   ${gl_kjlan}2.   ${gl_bai}wgetダウンロードツール${gl_huang}★${gl_bai}"
@@ -6759,7 +6759,7 @@ linux_docker() {
 	  echo -e "${gl_kjlan}5.   ${gl_bai}Dockerネットワーク管理"
 	  echo -e "${gl_kjlan}6.   ${gl_bai}Docker ボリューム管理"
 	  echo -e "${gl_kjlan}------------------------"
-	  echo -e "${gl_kjlan}7.   ${gl_bai}不要な Docker コンテナをクリーンアップし、ネットワーク データ ボリュームをミラーリングします"
+	  echo -e "${gl_kjlan}7.   ${gl_bai}不要な Docker コンテナをクリーンアップし、ネットワーク データ ボリュームをミラーリングします。"
 	  echo -e "${gl_kjlan}------------------------"
 	  echo -e "${gl_kjlan}8.   ${gl_bai}Dockerソースを変更する"
 	  echo -e "${gl_kjlan}9.   ${gl_bai}daemon.json ファイルを編集する"
@@ -6901,7 +6901,7 @@ linux_docker() {
 				  echo ""
 				  echo "ボリューム操作"
 				  echo "------------------------"
-				  echo "1. 新しいボリュームを作成します"
+				  echo "1. 新しいボリュームを作成する"
 				  echo "2. 指定したボリュームを削除します"
 				  echo "3. すべてのボリュームを削除します"
 				  echo "------------------------"
@@ -8350,7 +8350,7 @@ linux_panel() {
 	  echo -e "${gl_kjlan}------------------------"
 	  echo -e "${gl_kjlan}1.   ${gl_bai}パゴダパネル正式版${gl_kjlan}2.   ${gl_bai}aaPanel パゴダ国際版"
 	  echo -e "${gl_kjlan}3.   ${gl_bai}1Panel 新世代管理パネル${gl_kjlan}4.   ${gl_bai}NginxProxyManager 視覚化パネル"
-	  echo -e "${gl_kjlan}5.   ${gl_bai}OpenList マルチストア ファイル リスト プログラム${gl_kjlan}6.   ${gl_bai}Ubuntu リモート デスクトップ Web エディション"
+	  echo -e "${gl_kjlan}5.   ${gl_bai}OpenList マルチストア ファイル リスト プログラム${gl_kjlan}6.   ${gl_bai}Ubuntu リモート デスクトップ Web バージョン"
 	  echo -e "${gl_kjlan}7.   ${gl_bai}Nezha Probe VPS 監視パネル${gl_kjlan}8.   ${gl_bai}QBオフラインBT磁気ダウンロードパネル"
 	  echo -e "${gl_kjlan}9.   ${gl_bai}Poste.io メール サーバー プログラム${gl_kjlan}10.  ${gl_bai}RocketChat 複数人オンライン チャット システム"
 	  echo -e "${gl_kjlan}------------------------"
@@ -10473,7 +10473,7 @@ linux_panel() {
 
 			docker_rum() {
 
-				read -e -p "設定${docker_name}ログインユーザー名:" app_use
+				read -e -p "設定${docker_name}ログインユーザー名：" app_use
 				read -e -p "設定${docker_name}ログインパスワード:" app_passwd
 
 				docker run -d \
@@ -10576,7 +10576,7 @@ linux_work() {
 	  echo -e "バックエンドワークスペース"
 	  echo -e "システムは、バックグラウンドで永続的に実行できるワークスペースを提供し、長期的なタスクを実行するために使用できます。"
 	  echo -e "SSH を切断しても、ワークスペース内のタスクは中断されず、タスクはバックグラウンドで残ります。"
-	  echo -e "${gl_huang}ヒント：${gl_bai}ワークスペースに入ったら、Ctrl+b を使用し、d だけを押してワークスペースを終了します。"
+	  echo -e "${gl_huang}ヒント：${gl_bai}ワークスペースに入ったら、Ctrl+b を使用し、次に d を単独で押してワークスペースを終了します。"
 	  echo -e "${gl_kjlan}------------------------"
 	  echo "現在存在するワークスペースのリスト"
 	  echo -e "${gl_kjlan}------------------------"
@@ -12589,7 +12589,7 @@ echo "docker イメージ管理 k docker img |k docker image"
 echo "LDNMP サイト管理 k Web"
 echo "LDNMP キャッシュのクリーニング k Web キャッシュ"
 echo "WordPress をインストールします。 kワードプレス | k wp xxx.com"
-echo "リバース プロキシをインストールします k fd |k rp |k リバース プロキシ |k fd xxx.com"
+echo "リバース プロキシ k fd |k rp |k リバース プロキシ |k fd xxx.com をインストールします。"
 echo "ロード バランシングのインストール k ロード バランシング |k ロード バランシング"
 echo "ファイアウォール パネル k fhq |k ファイアウォール"
 echo "ポートを開きます k dkdk 8080 |k ポートを開きます 8080"

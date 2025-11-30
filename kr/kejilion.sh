@@ -2695,7 +2695,7 @@ while true; do
 	 case $choice in
 		1)
 			check_disk_space $app_size
-			read -e -p "애플리케이션 외부 서비스 포트를 입력하고 Enter 키를 누르면 기본적으로 사용됩니다.${docker_port}포트:" app_port
+			read -e -p "애플리케이션 외부 서비스 포트를 입력하고 Enter를 누르면 기본적으로 사용됩니다.${docker_port}포트:" app_port
 			local app_port=${app_port:-${docker_port}}
 			local docker_port=$app_port
 
@@ -2802,7 +2802,7 @@ docker_app_plus() {
 		case $choice in
 			1)
 				check_disk_space $app_size
-				read -e -p "애플리케이션 외부 서비스 포트를 입력하고 Enter 키를 누르면 기본적으로 사용됩니다.${docker_port}포트:" app_port
+				read -e -p "애플리케이션 외부 서비스 포트를 입력하고 Enter를 누르면 기본적으로 사용됩니다.${docker_port}포트:" app_port
 				local app_port=${app_port:-${docker_port}}
 				local docker_port=$app_port
 				install jq
@@ -4815,7 +4815,7 @@ bbrv3() {
 		  echo "------------------------------------------------"
 		  echo "데비안/우분투만 지원"
 		  echo "데이터를 백업해 주시면 Linux 커널을 업그레이드하고 BBR3을 활성화하겠습니다."
-		  echo "VPS에는 512M의 메모리가 있습니다. 메모리 부족으로 인한 연결 끊김을 방지하기 위해 가상 메모리 1G를 미리 추가해주세요!"
+		  echo "VPS에는 512M 메모리가 있습니다. 메모리 부족으로 인한 연결 끊김을 방지하기 위해 미리 1G 가상 메모리를 추가해주세요!"
 		  echo "------------------------------------------------"
 		  read -e -p "계속하시겠습니까? (예/아니요):" choice
 
@@ -6019,7 +6019,7 @@ disk_manager() {
 	send_stats "하드디스크 관리 기능"
 	while true; do
 		clear
-		echo "하드 드라이브 파티션 관리"
+		echo "하드 디스크 파티션 관리"
 		echo -e "${gl_huang}이 기능은 내부 테스트 중이므로 프로덕션 환경에서는 사용하면 안 됩니다.${gl_bai}"
 		echo "------------------------"
 		list_partitions
@@ -6871,7 +6871,7 @@ linux_docker() {
 					  3)
 						  send_stats "네트워크에 가입하세요"
 						  read -e -p "종료 네트워크 이름:" dockernetwork
-						  read -e -p "이러한 컨테이너는 네트워크를 종료합니다(여러 컨테이너 이름을 공백으로 구분하세요)." dockernames
+						  read -e -p "해당 컨테이너는 네트워크를 종료합니다(여러 컨테이너 이름을 공백으로 구분하세요)." dockernames
 
 						  for dockername in $dockernames; do
 							  docker network disconnect $dockernetwork $dockername
@@ -8350,7 +8350,7 @@ linux_panel() {
 	  echo -e "${gl_kjlan}------------------------"
 	  echo -e "${gl_kjlan}1.   ${gl_bai}파고다 패널 공식 버전${gl_kjlan}2.   ${gl_bai}aaPanel Pagoda 국제 버전"
 	  echo -e "${gl_kjlan}3.   ${gl_bai}1패널 차세대 관리 패널${gl_kjlan}4.   ${gl_bai}NginxProxyManager 시각화 패널"
-	  echo -e "${gl_kjlan}5.   ${gl_bai}OpenList 다중 저장소 파일 목록 프로그램${gl_kjlan}6.   ${gl_bai}Ubuntu 원격 데스크톱 웹 에디션"
+	  echo -e "${gl_kjlan}5.   ${gl_bai}OpenList 다중 저장소 파일 목록 프로그램${gl_kjlan}6.   ${gl_bai}Ubuntu 원격 데스크톱 웹 버전"
 	  echo -e "${gl_kjlan}7.   ${gl_bai}나타 프로브 VPS 모니터링 패널${gl_kjlan}8.   ${gl_bai}QB 오프라인 BT 자기 다운로드 패널"
 	  echo -e "${gl_kjlan}9.   ${gl_bai}Poste.io 메일 서버 프로그램${gl_kjlan}10.  ${gl_bai}RocketChat 다자간 온라인 채팅 시스템"
 	  echo -e "${gl_kjlan}------------------------"
@@ -10768,7 +10768,7 @@ linux_Settings() {
 	  echo -e "${gl_kjlan}3.   ${gl_bai}ROOT 비밀번호 로그인 모드${gl_kjlan}4.   ${gl_bai}지정된 버전의 Python 설치"
 	  echo -e "${gl_kjlan}5.   ${gl_bai}모든 포트 열기${gl_kjlan}6.   ${gl_bai}SSH 연결 포트 수정"
 	  echo -e "${gl_kjlan}7.   ${gl_bai}DNS 주소 최적화${gl_kjlan}8.   ${gl_bai}한 번의 클릭으로 시스템을 다시 설치${gl_huang}★${gl_bai}"
-	  echo -e "${gl_kjlan}9.   ${gl_bai}ROOT 계정을 비활성화하고 새 계정을 만듭니다.${gl_kjlan}10.  ${gl_bai}우선순위 ipv4/ipv6 전환"
+	  echo -e "${gl_kjlan}9.   ${gl_bai}ROOT 계정을 비활성화하고 새 계정을 만듭니다.${gl_kjlan}10.  ${gl_bai}우선 순위 ipv4/ipv6 전환"
 	  echo -e "${gl_kjlan}------------------------"
 	  echo -e "${gl_kjlan}11.  ${gl_bai}항만점유현황 확인${gl_kjlan}12.  ${gl_bai}가상 메모리 크기 수정"
 	  echo -e "${gl_kjlan}13.  ${gl_bai}사용자 관리${gl_kjlan}14.  ${gl_bai}사용자/비밀번호 생성기"
@@ -11317,7 +11317,7 @@ EOF
 					  echo "$new_hostname" > /etc/hostname
 					  hostname "$new_hostname"
 				  else
-					  # Debian, Ubuntu, CentOS 등과 같은 다른 시스템
+					  # Debian, Ubuntu, CentOS 등과 같은 기타 시스템
 					  hostnamectl set-hostname "$new_hostname"
 					  sed -i "s/$current_hostname/$new_hostname/g" /etc/hostname
 					  systemctl restart systemd-hostnamed
