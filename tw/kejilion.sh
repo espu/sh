@@ -597,7 +597,7 @@ docker_image() {
 while true; do
 	clear
 	send_stats "Docker映像管理"
-	echo "Docker映像列表"
+	echo "Docker镜像列表"
 	docker image ls
 	echo ""
 	echo "鏡像操作"
@@ -3315,7 +3315,7 @@ ldnmp_web_status() {
 		echo "1. 申請/更新網域憑證 2. 更換站點域名"
 		echo "3. 清理站點快取 4. 建立關聯站點"
 		echo "5. 查看訪問日誌 6. 查看錯誤日誌"
-		echo "7. 編輯全域配置 8. 編輯站點配置"
+		echo "7.  编辑全局配置                    8.  编辑站点配置"
 		echo "9. 管理站點資料庫 10. 查看站點分析報告"
 		echo "------------------------"
 		echo "20. 刪除指定站點數據"
@@ -3338,7 +3338,7 @@ ldnmp_web_status() {
 				send_stats "更換站點域名"
 				echo -e "${gl_hong}強烈建議:${gl_bai}先備份好全站資料再更換站點網域！"
 				read -e -p "請輸入舊網域名稱:" oddyuming
-				read -e -p "請輸入新網域名稱:" yuming
+				read -e -p "請輸入新網域:" yuming
 				install_certbot
 				install_ssltls
 				certs_status
@@ -3385,7 +3385,7 @@ ldnmp_web_status() {
 				send_stats "建立關聯站點"
 				echo -e "為現有的站點再關聯一個新網域用於訪問"
 				read -e -p "請輸入現有的網域名稱:" oddyuming
-				read -e -p "請輸入新網域名稱:" yuming
+				read -e -p "請輸入新網域:" yuming
 				install_certbot
 				install_ssltls
 				certs_status
@@ -4830,7 +4830,7 @@ bbrv3() {
 					linux_Settings
 				fi
 			else
-				echo "無法確定作業系統類型"
+				echo "无法确定操作系统类型"
 				break_end
 				linux_Settings
 			fi
@@ -10943,7 +10943,7 @@ EOF
 						send_stats "SSH連接埠已修改"
 						new_ssh_port
 					elif [[ $new_port -eq 0 ]]; then
-						send_stats "退出SSH埠修改"
+						send_stats "退出SSH連接埠修改"
 						break
 					else
 						echo "連接埠號碼無效，請輸入1到65535之間的數字。"
@@ -11063,7 +11063,7 @@ EOF
 
 				case "$choice" in
 				  1)
-					send_stats "已設定1G虛擬內存"
+					send_stats "已设置1G虚拟内存"
 					add_swap 1024
 
 					;;
@@ -11595,7 +11595,7 @@ EOF
 					(crontab -l ; echo "* * * * * ~/Limiting_Shut_down.sh") | crontab - > /dev/null 2>&1
 					crontab -l | grep -v 'reboot' | crontab -
 					(crontab -l ; echo "0 1 $cz_day * * reboot") | crontab - > /dev/null 2>&1
-					echo "限流關機已設定"
+					echo "限流关机已设置"
 					send_stats "限流關機已設定"
 					;;
 				  2)
@@ -11798,7 +11798,7 @@ EOF
 			  echo "------------------------------------------------"
 			  echo "將對以下內容進行操作與優化"
 			  echo "1. 更新系統到最新"
-			  echo "2. 清理系統垃圾文件"
+			  echo "2. 清理系统垃圾文件"
 			  echo -e "3. 設定虛擬內存${gl_huang}1G${gl_bai}"
 			  echo -e "4. 設定SSH埠號為${gl_huang}5522${gl_bai}"
 			  echo -e "5. 開放所有端口"
@@ -11816,7 +11816,7 @@ EOF
 				  send_stats "一條龍調優啟動"
 				  echo "------------------------------------------------"
 				  linux_update
-				  echo -e "[${gl_lv}OK${gl_bai}] 1/10. 更新系統到最新"
+				  echo -e "[${gl_lv}OK${gl_bai}] 1/10. 更新系统到最新"
 
 				  echo "------------------------------------------------"
 				  linux_clean
@@ -12129,7 +12129,7 @@ linux_file() {
 				read -e -p "請輸入要傳送的檔案路徑:" file_to_transfer
 				if [ ! -f "$file_to_transfer" ]; then
 					echo "錯誤: 文件不存在。"
-					send_stats "傳送文件失敗: 文件不存在"
+					send_stats "传送文件失败: 文件不存在"
 					continue
 				fi
 
@@ -12147,7 +12147,7 @@ linux_file() {
 				echo
 				if [ -z "$remote_password" ]; then
 					echo "錯誤: 請輸入遠端伺服器密碼。"
-					send_stats "傳送檔案失敗: 未輸入遠端伺服器密碼"
+					send_stats "传送文件失败: 未输入远端服务器密码"
 					continue
 				fi
 
@@ -12371,7 +12371,7 @@ echo -e "${gl_zi}V.PS 6.9刀每月 東京軟銀 2核心 1G內存 20G硬碟 1T流
 echo -e "${gl_bai}網址: https://vps.hosting/cart/tokyo-cloud-kvm-vps/?id=148&?affid=1355&?affid=1355${gl_bai}"
 echo "------------------------"
 echo -e "${gl_kjlan}VPS更多熱門優惠${gl_bai}"
-echo -e "${gl_bai}網址: https://kejilion.pro/topvps/${gl_bai}"
+echo -e "${gl_bai}网址: https://kejilion.pro/topvps/${gl_bai}"
 echo "------------------------"
 echo ""
 echo -e "網域優惠"
@@ -12566,7 +12566,7 @@ echo "更新系統 k update | k 更新"
 echo "清理系統垃圾 k clean | k 清理"
 echo "重裝系統面板 k dd | k 重裝"
 echo "bbr3控制面板 k bbr3 | k bbrv3"
-echo "核心調優面板 k nhyh | k 核心最佳化"
+echo "内核调优面板        k nhyh | k 内核优化"
 echo "設定虛擬記憶體 k swap 2048"
 echo "設定虛擬時區 k time Asia/Shanghai | k 時區 Asia/Shanghai"
 echo "系統回收站 k trash | k hsz | k 回收站"

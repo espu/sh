@@ -1041,7 +1041,7 @@ manage_country_rules() {
 			iptables -A INPUT -m set --match-set "$ipset_name" src -j ACCEPT
 			iptables -A OUTPUT -m set --match-set "$ipset_name" dst -j ACCEPT
 
-			echo "已成功仅允许 $country_codeIPアドレス"
+			echo "正常に許可された場合のみ$country_codeIPアドレス"
 			rm "${country_code,,}.zone"
 			;;
 
@@ -1621,7 +1621,7 @@ cf_purge_cache() {
 	# キャッシュをクリアするかどうかをユーザーに確認する
 	read -e -p "Cloudflareのキャッシュをクリアする必要がありますか? (y/n):" answer
 	if [[ "$answer" == "y" ]]; then
-	  echo "CF 情報は次の場所に保存されます。$CONFIG_FILECF 情報は後で変更できます。"
+	  echo "CF情報は以下に保存されます。$CONFIG_FILECF 情報は後で変更できます。"
 	  read -e -p "API_TOKEN を入力してください:" API_TOKEN
 	  read -e -p "CF ユーザー名を入力してください:" EMAIL
 	  read -e -p "zone_id を入力してください (複数の場合はスペースで区切ります):" -a ZONE_IDS
@@ -1826,7 +1826,7 @@ nginx_br() {
 		sed -i '/brotli_types/,+6 s/^\(\s*\)#\s*/\1/' /home/web/nginx.conf
 
 	elif [ "$mode" == "off" ]; then
-		# ブロトリを閉じる: コメントを追加
+		# Brotliを閉じる: コメントを追加
 		sed -i 's|^load_module /etc/nginx/modules/ngx_http_brotli_filter_module.so;|# load_module /etc/nginx/modules/ngx_http_brotli_filter_module.so;|' /home/web/nginx.conf > /dev/null 2>&1
 		sed -i 's|^load_module /etc/nginx/modules/ngx_http_brotli_static_module.so;|# load_module /etc/nginx/modules/ngx_http_brotli_static_module.so;|' /home/web/nginx.conf > /dev/null 2>&1
 
@@ -2072,7 +2072,7 @@ web_security() {
 					  ;;
 
 				  22)
-					  send_stats "高負荷により5秒シールドが可能"
+					  send_stats "高負荷で5秒シールド可能"
 					  echo -e "${gl_huang}Web サイトは 5 分ごとに自動的に検出します。高負荷を検出すると自動的にシールドが開き、低負荷を検出すると5秒間自動的にシールドが閉じます。${gl_bai}"
 					  echo "--------------"
 					  echo "CFパラメータを取得します。"
@@ -3417,7 +3417,7 @@ ldnmp_web_status() {
 
 			8)
 				send_stats "サイト構成を編集する"
-				read -e -p "サイト設定を編集するには、編集するドメイン名を入力してください:" yuming
+				read -e -p "サイト構成を編集するには、編集するドメイン名を入力してください:" yuming
 				install nano
 				nano /home/web/conf.d/$yuming.conf
 				docker exec nginx nginx -s reload
@@ -4252,7 +4252,7 @@ while true; do
 	echo "2.国内DNSの最適化:"
 	echo " v4: 223.5.5.5 183.60.83.19"
 	echo " v6: 2400:3200::1 2400:da00::6666"
-	echo "3. DNS 構成を手動で編集する"
+	echo "3. DNS 設定を手動で編集する"
 	echo "------------------------"
 	echo "0. 前のメニューに戻る"
 	echo "------------------------"
@@ -4815,7 +4815,7 @@ bbrv3() {
 		  echo "------------------------------------------------"
 		  echo "Debian/Ubuntu のみをサポートします"
 		  echo "データをバックアップしてください。Linux カーネルをアップグレードして BBR3 を有効にします。"
-		  echo "VPS には 512M のメモリが搭載されています。メモリ不足による接続の切断を防ぐために、事前に 1G の仮想メモリを追加してください。"
+		  echo "The VPS has 512M of memory.メモリ不足による接続の切断を防ぐために、事前に 1G の仮想メモリを追加してください。"
 		  echo "------------------------------------------------"
 		  read -e -p "続行してもよろしいですか? (はい/いいえ):" choice
 
@@ -5518,7 +5518,7 @@ linux_trash() {
 		sed -i '/alias rm/d' "$bashrc_profile"
 		echo "alias rm='trash-put'" >> "$bashrc_profile"
 		source "$bashrc_profile"
-		echo "回收站已启用，删除的文件将移至回收站。"
+		echo "ごみ箱が有効になっていると、削除されたファイルはごみ箱に移動されます。"
 		sleep 2
 		;;
 	  2)
@@ -5893,7 +5893,7 @@ mount_partition() {
 
 	# パーティションが存在するかどうかを確認する
 	if ! lsblk -o NAME | grep -w "$PARTITION" > /dev/null; then
-		echo "パーティションが存在しません!"
+		echo "分区不存在！"
 		return
 	fi
 
@@ -6067,7 +6067,7 @@ add_task() {
 	read -e -p "ローカル ディレクトリを入力してください:" local_path
 	read -e -p "リモート ディレクトリを入力してください:" remote_path
 	read -e -p "リモート ユーザー@IP を入力してください:" remote
-	read -e -p "SSH ポート (デフォルトは 22) を入力してください:" port
+	read -e -p "SSH ポートを入力してください (デフォルトは 22):" port
 	port=${port:-22}
 
 	echo "認証方法を選択してください:"
@@ -6226,7 +6226,7 @@ run_task() {
 	else
 		echo "同期に失敗しました!以下の点をご確認ください。"
 		echo "1. ネットワーク接続は正常ですか?"
-		echo "2. リモート ホストにアクセスできますか?"
+		echo "2. リモートホストにアクセスできるかどうか"
 		echo "3. 認証情報は正しいですか?"
 		echo "4. ローカル ディレクトリとリモート ディレクトリには正しいアクセス許可がありますか?"
 	fi
@@ -6759,7 +6759,7 @@ linux_docker() {
 	  echo -e "${gl_kjlan}5.   ${gl_bai}Dockerネットワーク管理"
 	  echo -e "${gl_kjlan}6.   ${gl_bai}Docker ボリューム管理"
 	  echo -e "${gl_kjlan}------------------------"
-	  echo -e "${gl_kjlan}7.   ${gl_bai}不要な Docker コンテナをクリーンアップし、ネットワーク データ ボリュームをミラーリングします"
+	  echo -e "${gl_kjlan}7.   ${gl_bai}不要な Docker コンテナをクリーンアップし、ネットワーク データ ボリュームをミラーリングします。"
 	  echo -e "${gl_kjlan}------------------------"
 	  echo -e "${gl_kjlan}8.   ${gl_bai}Dockerソースを変更する"
 	  echo -e "${gl_kjlan}9.   ${gl_bai}daemon.json ファイルを編集する"
@@ -8387,10 +8387,10 @@ linux_panel() {
 	  echo -e "${gl_kjlan}61.  ${gl_bai}オンライン翻訳サーバー${gl_kjlan}62.  ${gl_bai}RAGFlow 大規模モデルのナレッジ ベース"
 	  echo -e "${gl_kjlan}63.  ${gl_bai}OpenWebUI セルフホスト型 AI プラットフォーム${gl_huang}★${gl_bai}             ${gl_kjlan}64.  ${gl_bai}ITツールツールボックス"
 	  echo -e "${gl_kjlan}65.  ${gl_bai}n8n自動ワークフロープラットフォーム${gl_huang}★${gl_bai}               ${gl_kjlan}66.  ${gl_bai}yt-dlp ビデオ ダウンロード ツール"
-	  echo -e "${gl_kjlan}67.  ${gl_bai}ddns-go ダイナミック DNS 管理ツール${gl_huang}★${gl_bai}            ${gl_kjlan}68.  ${gl_bai}AllinSSL证书管理平台"
-	  echo -e "${gl_kjlan}69.  ${gl_bai}SFTPGo ファイル転送ツール${gl_kjlan}70.  ${gl_bai}AstrBot聊天机器人框架"
+	  echo -e "${gl_kjlan}67.  ${gl_bai}ddns-go ダイナミック DNS 管理ツール${gl_huang}★${gl_bai}            ${gl_kjlan}68.  ${gl_bai}AllinSSL 証明書管理プラットフォーム"
+	  echo -e "${gl_kjlan}69.  ${gl_bai}SFTPGo ファイル転送ツール${gl_kjlan}70.  ${gl_bai}AstBot チャットボット フレームワーク"
 	  echo -e "${gl_kjlan}------------------------"
-	  echo -e "${gl_kjlan}71.  ${gl_bai}Navidrome私有音乐服务器             ${gl_kjlan}72.  ${gl_bai}bitwarden パスワードマネージャー${gl_huang}★${gl_bai}"
+	  echo -e "${gl_kjlan}71.  ${gl_bai}Navidrome プライベート ミュージック サーバー${gl_kjlan}72.  ${gl_bai}bitwarden パスワードマネージャー${gl_huang}★${gl_bai}"
 	  echo -e "${gl_kjlan}73.  ${gl_bai}LibreTV プライベートムービー${gl_kjlan}74.  ${gl_bai}MoonTV のプライベート ムービー"
 	  echo -e "${gl_kjlan}75.  ${gl_bai}メロディー音楽の魔法使い${gl_kjlan}76.  ${gl_bai}オンライン DOS 古いゲーム"
 	  echo -e "${gl_kjlan}77.  ${gl_bai}Thunder オフライン ダウンロード ツール${gl_kjlan}78.  ${gl_bai}PandaWiki インテリジェント文書管理システム"
@@ -8590,7 +8590,7 @@ linux_panel() {
 				fi
 				echo ""
 				echo "------------------------"
-				echo "1. 使用方法"
+				echo "1. 使用する"
 				echo "------------------------"
 				echo "0. 前のメニューに戻る"
 				echo "------------------------"
@@ -10473,7 +10473,7 @@ linux_panel() {
 
 			docker_rum() {
 
-				read -e -p "設定${docker_name}ログインユーザー名:" app_use
+				read -e -p "設定${docker_name}ログインユーザー名：" app_use
 				read -e -p "設定${docker_name}ログインパスワード:" app_passwd
 
 				docker run -d \
@@ -11019,8 +11019,8 @@ EOF
 						;;
 					2)
 						sysctl -w net.ipv6.conf.all.disable_ipv6=0 > /dev/null 2>&1
-						echo "IPv6優先に切り替えました"
-						send_stats "IPv6優先に切り替えました"
+						echo "最初にIPv6に切り替えました"
+						send_stats "最初にIPv6に切り替えました"
 						;;
 
 					3)
@@ -11244,7 +11244,7 @@ EOF
 				echo "3. 東京、日本時間 4. ソウル、韓国時間"
 				echo "5. シンガポール時間 6. インド、コルカタ時間"
 				echo "7. アラブ首長国連邦、ドバイ時間 8. オーストラリア、シドニー時間"
-				echo "9.タイ・バンコク時間"
+				echo "9. タイ・バンコク時間"
 				echo "------------------------"
 				echo "ヨーロッパ"
 				echo "11. ロンドン、イギリス時間 12. パリ、フランス時間"
@@ -11899,7 +11899,7 @@ EOF
 			  fi
 
 			  echo "プライバシーとセキュリティ"
-			  echo "スクリプトはユーザーの機能使用に関するデータを収集し、スクリプト エクスペリエンスを最適化し、より楽しくて便利な機能を作成します。"
+			  echo "スクリプトはユーザーによる機能の使用に関するデータを収集し、スクリプト エクスペリエンスを最適化し、より楽しくて便利な機能を作成します。"
 			  echo "スクリプトのバージョン番号、使用時間、システムバージョン、CPUアーキテクチャ、マシンの国、使用された機能の名前が収集されます。"
 			  echo "------------------------------------------------"
 			  echo -e "現在のステータス:$status_message"
@@ -12248,12 +12248,12 @@ while true; do
 	  echo -e "${gl_kjlan}------------------------${gl_bai}"
 	  echo -e "${gl_kjlan}サーバーリスト管理${gl_bai}"
 	  echo -e "${gl_kjlan}1.  ${gl_bai}サーバーの追加${gl_kjlan}2.  ${gl_bai}サーバーの削除${gl_kjlan}3.  ${gl_bai}サーバーの編集"
-	  echo -e "${gl_kjlan}4.  ${gl_bai}バックアップクラスタ${gl_kjlan}5.  ${gl_bai}クラスターを復元する"
+	  echo -e "${gl_kjlan}4.  ${gl_bai}バックアップクラスター${gl_kjlan}5.  ${gl_bai}クラスターを復元する"
 	  echo -e "${gl_kjlan}------------------------${gl_bai}"
 	  echo -e "${gl_kjlan}タスクをバッチで実行する${gl_bai}"
 	  echo -e "${gl_kjlan}11. ${gl_bai}テクノロジ ライオン スクリプトをインストールする${gl_kjlan}12. ${gl_bai}アップデートシステム${gl_kjlan}13. ${gl_bai}システムをクリーンアップする"
 	  echo -e "${gl_kjlan}14. ${gl_bai}ドッカーをインストールする${gl_kjlan}15. ${gl_bai}BBR3をインストールする${gl_kjlan}16. ${gl_bai}1Gの仮想メモリを設定する"
-	  echo -e "${gl_kjlan}17. ${gl_bai}タイムゾーンを上海に設定${gl_kjlan}18. ${gl_bai}すべてのポートを開く${gl_kjlan}51. ${gl_bai}カスタム命令"
+	  echo -e "${gl_kjlan}17. ${gl_bai}タイムゾーンを上海に設定${gl_kjlan}18. ${gl_bai}すべてのポートを開く${gl_kjlan}51. ${gl_bai}カスタムディレクティブ"
 	  echo -e "${gl_kjlan}------------------------${gl_bai}"
 	  echo -e "${gl_kjlan}0.  ${gl_bai}メインメニューに戻る"
 	  echo -e "${gl_kjlan}------------------------${gl_bai}"
@@ -12286,7 +12286,7 @@ while true; do
 
 		  4)
 			  clear
-			  send_stats "バックアップクラスタ"
+			  send_stats "バックアップクラスター"
 			  echo -e "変更してください${gl_huang}/root/cluster/servers.py${gl_bai}ファイルをダウンロードしてバックアップを完了してください。"
 			  break_end
 			  ;;
