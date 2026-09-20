@@ -1826,7 +1826,7 @@ nginx_br() {
 		sed -i '/brotli_types/,+6 s/^\(\s*\)#\s*/\1/' /home/web/nginx.conf
 
 	elif [ "$mode" == "off" ]; then
-		# Brotli 닫기: 댓글 추가
+		# 关闭 Brotli：加上注释
 		sed -i 's|^load_module /etc/nginx/modules/ngx_http_brotli_filter_module.so;|# load_module /etc/nginx/modules/ngx_http_brotli_filter_module.so;|' /home/web/nginx.conf > /dev/null 2>&1
 		sed -i 's|^load_module /etc/nginx/modules/ngx_http_brotli_static_module.so;|# load_module /etc/nginx/modules/ngx_http_brotli_static_module.so;|' /home/web/nginx.conf > /dev/null 2>&1
 
@@ -1903,7 +1903,7 @@ nginx_zstd() {
 		return 1
 	fi
 
-	# nginx 이미지를 확인하고 그에 따라 처리하세요.
+	# 检查 nginx 镜像并根据情况处理
 	if grep -q "kjlion/nginx:alpine" /home/web/docker-compose.yml; then
 		docker exec nginx nginx -s reload
 	else
@@ -1944,7 +1944,7 @@ nginx_gzip() {
 
 
 web_security() {
-	  send_stats "LDNMP 환경 방어"
+	  send_stats "LDNMP环境防御"
 	  while true; do
 		check_waf_status
 		check_cf_mode
@@ -1956,23 +1956,23 @@ web_security() {
 			  clear
 			  docker_name="fail2ban"
 			  check_docker_app
-			  echo -e "서버 웹사이트 방어 프로그램${check_docker}${gl_lv}${CFmessage}${waf_status}${gl_bai}"
+			  echo -e "服务器网站防御程序 ${check_docker}${gl_lv}${CFmessage}${waf_status}${gl_bai}"
 			  echo "------------------------"
 			  echo "1. 安装防御程序"
 			  echo "------------------------"
 			  echo "5. 查看SSH拦截记录                6. 查看网站拦截记录"
-			  echo "7. 방어규칙 목록 보기 8. 실시간 모니터링을 위한 로그 보기"
+			  echo "7. 查看防御规则列表               8. 查看日志实时监控"
 			  echo "------------------------"
 			  echo "11. 配置拦截参数                  12. 清除所有拉黑的IP"
 			  echo "------------------------"
-			  echo "21. cloudflare 모드 22. 고부하에서 5초 보호 활성화"
+			  echo "21. cloudflare模式                22. 高负载开启5秒盾"
 			  echo "------------------------"
 			  echo "31. 开启WAF                       32. 关闭WAF"
 			  echo "33. 开启DDOS防御                  34. 关闭DDOS防御"
 			  echo "------------------------"
-			  echo "9. 방어 프로그램 제거"
+			  echo "9. 卸载防御程序"
 			  echo "------------------------"
-			  echo "0. 이전 메뉴로 돌아가기"
+			  echo "0. 返回上一级选单"
 			  echo "------------------------"
 			  read -e -p "请输入你的选择: " sub_choice
 			  case $sub_choice in
@@ -2068,7 +2068,7 @@ web_security() {
 					  sed -i "s/APIKEY00000/$cftoken/g" /path/to/fail2ban/config/fail2ban/action.d/cloudflare-docker.conf
 					  f2b_status
 
-					  echo "Cloudflare 모드가 구성되었으며, 차단 기록은 cf 백그라운드, site-security-events에서 볼 수 있습니다."
+					  echo "已配置cloudflare模式，可在cf后台，站点-安全性-事件中查看拦截记录"
 					  ;;
 
 				  22)
@@ -2603,7 +2603,7 @@ clear_host_port_rules() {
 
 	if [[ -z "$port" || -z "$allowed_ip" ]]; then
 		echo "错误：请提供端口号和允许访问的 IP。"
-		echo "사용법:clear_host_port_rules <포트 번호> <허용 IP>"
+		echo "用法: clear_host_port_rules <端口号> <允许的IP>"
 		return 1
 	fi
 
@@ -2642,7 +2642,7 @@ clear_host_port_rules() {
 	fi
 
 
-	echo "IP+포트로 서비스 접속이 허용되었습니다"
+	echo "已允许IP+端口访问该服务"
 	save_iptables_rules
 
 }
@@ -2664,7 +2664,7 @@ setup_docker_dir() {
 
 
 docker_app() {
-send_stats "${docker_name}관리하다"
+send_stats "${docker_name}管理"
 
 while true; do
 	clear
@@ -2686,7 +2686,7 @@ while true; do
 	echo "------------------------"
 	echo "1. 安装              2. 更新            3. 卸载"
 	echo "------------------------"
-	echo "5. 도메인 이름 액세스 추가 6. 도메인 이름 액세스 삭제"
+	echo "5. 添加域名访问      6. 删除域名访问"
 	echo "7. 允许IP+端口访问   8. 阻止IP+端口访问"
 	echo "------------------------"
 	echo "0. 返回上一级选单"
@@ -4887,10 +4887,10 @@ elrepo_install() {
 	echo "检测到的操作系统: $os_name $os_version"
 	# 根据系统版本安装对应的 ELRepo 仓库配置
 	if [[ "$os_version" == 8 ]]; then
-		echo "ELRepo 저장소 구성(버전 8) 설치 중..."
+		echo "安装 ELRepo 仓库配置 (版本 8)..."
 		yum -y install https://www.elrepo.org/elrepo-release-8.el8.elrepo.noarch.rpm
 	elif [[ "$os_version" == 9 ]]; then
-		echo "ELRepo 저장소 구성(버전 9) 설치 중..."
+		echo "安装 ELRepo 仓库配置 (版本 9)..."
 		yum -y install https://www.elrepo.org/elrepo-release-9.el9.elrepo.noarch.rpm
 	elif [[ "$os_version" == 10 ]]; then
 		echo "安装 ELRepo 仓库配置 (版本 10)..."
@@ -5026,7 +5026,7 @@ clamav_scan() {
 		clamscan -r --log=/var/log/clamav/scan.log $SCAN_PARAMS
 
 	echo -e "${gl_lv}$@ 扫描完成，病毒报告存放在${gl_huang}/home/docker/clamav/log/scan.log${gl_bai}"
-	echo -e "${gl_lv}如果有病毒请在${gl_huang}scan.log${gl_lv}파일에서 FOUND 키워드를 검색하여 바이러스 위치를 확인하세요.${gl_bai}"
+	echo -e "${gl_lv}如果有病毒请在${gl_huang}scan.log${gl_lv}文件中搜索FOUND关键字确认病毒位置 ${gl_bai}"
 
 }
 
@@ -5038,13 +5038,13 @@ clamav_scan() {
 
 clamav() {
 		  root_use
-		  send_stats "바이러스 검사 관리"
+		  send_stats "病毒扫描管理"
 		  while true; do
 				clear
 				echo "clamav病毒扫描工具"
 				echo "视频介绍: https://www.bilibili.com/video/BV1TqvZe4EQm?t=0.1"
 				echo "------------------------"
-				echo "다양한 유형의 악성 코드를 탐지하고 제거하는 데 주로 사용되는 오픈 소스 바이러스 백신 소프트웨어 도구입니다."
+				echo "是一个开源的防病毒软件工具，主要用于检测和删除各种类型的恶意软件。"
 				echo "包括病毒、特洛伊木马、间谍软件、恶意脚本和其他有害软件。"
 				echo "------------------------"
 				echo -e "${gl_lv}1. 全盘扫描 ${gl_bai}             ${gl_huang}2. 重要目录扫描 ${gl_bai}            ${gl_kjlan} 3. 自定义目录扫描 ${gl_bai}"
@@ -5072,7 +5072,7 @@ clamav() {
 						;;
 					3)
 					  send_stats "自定义目录扫描"
-					  read -e -p "스캔할 디렉터리를 공백으로 구분하여 입력하십시오(예: /etc /var /usr /home /root)." directories
+					  read -e -p "请输入要扫描的目录，用空格分隔（例如：/etc /var /usr /home /root）: " directories
 					  install_docker
 					  clamav_freshclam
 					  clamav_scan $directories
@@ -5096,7 +5096,7 @@ optimize_high_performance() {
 	echo -e "${gl_lv}优化文件描述符...${gl_bai}"
 	ulimit -n 65535
 
-	echo -e "${gl_lv}가상 메모리 최적화...${gl_bai}"
+	echo -e "${gl_lv}优化虚拟内存...${gl_bai}"
 	sysctl -w vm.swappiness=10 2>/dev/null
 	sysctl -w vm.dirty_ratio=15 2>/dev/null
 	sysctl -w vm.dirty_background_ratio=5 2>/dev/null
@@ -5115,7 +5115,7 @@ optimize_high_performance() {
 	sysctl -w net.ipv4.tcp_tw_reuse=1 2>/dev/null
 	sysctl -w net.ipv4.ip_local_port_range='1024 65535' 2>/dev/null
 
-	echo -e "${gl_lv}캐시 관리 최적화...${gl_bai}"
+	echo -e "${gl_lv}优化缓存管理...${gl_bai}"
 	sysctl -w vm.vfs_cache_pressure=50 2>/dev/null
 
 	echo -e "${gl_lv}优化CPU设置...${gl_bai}"
@@ -5132,7 +5132,7 @@ optimize_high_performance() {
 
 # 均衡模式优化函数
 optimize_balanced() {
-	echo -e "${gl_lv}이퀄라이제이션 모드로 전환...${gl_bai}"
+	echo -e "${gl_lv}切换到均衡模式...${gl_bai}"
 
 	echo -e "${gl_lv}优化文件描述符...${gl_bai}"
 	ulimit -n 32768
@@ -7102,26 +7102,26 @@ linux_test() {
 			  ;;
 		  14)
 			  clear
-			  send_stats "nxtrace 빠른 백홀 테스트 스크립트"
+			  send_stats "nxtrace快速回程测试脚本"
 			  curl nxtrace.org/nt |bash
 			  nexttrace --fast-trace --tcp
 			  ;;
 		  15)
 			  clear
 			  send_stats "nxtrace指定IP回程测试脚本"
-			  echo "참조 IP 목록"
+			  echo "可参考的IP列表"
 			  echo "------------------------"
 			  echo "北京电信: 219.141.136.12"
 			  echo "北京联通: 202.106.50.1"
-			  echo "베이징 모바일: 221.179.155.161"
+			  echo "北京移动: 221.179.155.161"
 			  echo "上海电信: 202.96.209.133"
 			  echo "上海联通: 210.22.97.1"
 			  echo "上海移动: 211.136.112.200"
 			  echo "广州电信: 58.60.188.222"
-			  echo "광저우 차이나 유니콤: 210.21.196.6"
+			  echo "广州联通: 210.21.196.6"
 			  echo "广州移动: 120.196.165.24"
 			  echo "成都电信: 61.139.2.69"
-			  echo "청두 차이나 유니콤: 119.6.6.6"
+			  echo "成都联通: 119.6.6.6"
 			  echo "成都移动: 211.137.96.205"
 			  echo "湖南电信: 36.111.200.100"
 			  echo "湖南联通: 42.48.16.100"
@@ -8352,23 +8352,23 @@ linux_panel() {
 	  echo -e "${gl_kjlan}3.   ${gl_bai}1Panel新一代管理面板                ${gl_kjlan}4.   ${gl_bai}NginxProxyManager可视化面板"
 	  echo -e "${gl_kjlan}5.   ${gl_bai}OpenList多存储文件列表程序          ${gl_kjlan}6.   ${gl_bai}Ubuntu远程桌面网页版"
 	  echo -e "${gl_kjlan}7.   ${gl_bai}哪吒探针VPS监控面板                 ${gl_kjlan}8.   ${gl_bai}QB离线BT磁力下载面板"
-	  echo -e "${gl_kjlan}9.   ${gl_bai}Poste.io邮件服务器程序              ${gl_kjlan}10.  ${gl_bai}RocketChat 다자간 온라인 채팅 시스템"
+	  echo -e "${gl_kjlan}9.   ${gl_bai}Poste.io邮件服务器程序              ${gl_kjlan}10.  ${gl_bai}RocketChat多人在线聊天系统"
 	  echo -e "${gl_kjlan}------------------------"
-	  echo -e "${gl_kjlan}11.  ${gl_bai}ZenTao 프로젝트 관리 소프트웨어${gl_kjlan}12.  ${gl_bai}青龙面板定时任务管理平台"
-	  echo -e "${gl_kjlan}13.  ${gl_bai}Cloudreve网盘 ${gl_huang}★${gl_bai}                     ${gl_kjlan}14.  ${gl_bai}간단한 그림 침대 그림 관리 프로그램"
-	  echo -e "${gl_kjlan}15.  ${gl_bai}emby 멀티미디어 관리 시스템${gl_kjlan}16.  ${gl_bai}Speedtest 속도 테스트 패널"
-	  echo -e "${gl_kjlan}17.  ${gl_bai}AdGuardHome去广告软件               ${gl_kjlan}18.  ${gl_bai}onlyoffice온라인 오피스 OFFICE"
-	  echo -e "${gl_kjlan}19.  ${gl_bai}雷池WAF防火墙面板                   ${gl_kjlan}20.  ${gl_bai}포테이너 컨테이너 관리 패널"
+	  echo -e "${gl_kjlan}11.  ${gl_bai}禅道项目管理软件                    ${gl_kjlan}12.  ${gl_bai}青龙面板定时任务管理平台"
+	  echo -e "${gl_kjlan}13.  ${gl_bai}Cloudreve网盘 ${gl_huang}★${gl_bai}                     ${gl_kjlan}14.  ${gl_bai}简单图床图片管理程序"
+	  echo -e "${gl_kjlan}15.  ${gl_bai}emby多媒体管理系统                  ${gl_kjlan}16.  ${gl_bai}Speedtest测速面板"
+	  echo -e "${gl_kjlan}17.  ${gl_bai}AdGuardHome去广告软件               ${gl_kjlan}18.  ${gl_bai}onlyoffice在线办公OFFICE"
+	  echo -e "${gl_kjlan}19.  ${gl_bai}雷池WAF防火墙面板                   ${gl_kjlan}20.  ${gl_bai}portainer容器管理面板"
 	  echo -e "${gl_kjlan}------------------------"
 	  echo -e "${gl_kjlan}21.  ${gl_bai}VScode网页版                        ${gl_kjlan}22.  ${gl_bai}UptimeKuma监控工具"
-	  echo -e "${gl_kjlan}23.  ${gl_bai}Memos网页备忘录                     ${gl_kjlan}24.  ${gl_bai}Webtop 원격 데스크톱 웹 버전${gl_huang}★${gl_bai}"
+	  echo -e "${gl_kjlan}23.  ${gl_bai}Memos网页备忘录                     ${gl_kjlan}24.  ${gl_bai}Webtop远程桌面网页版 ${gl_huang}★${gl_bai}"
 	  echo -e "${gl_kjlan}25.  ${gl_bai}Nextcloud网盘                       ${gl_kjlan}26.  ${gl_bai}QD-Today定时任务管理框架"
 	  echo -e "${gl_kjlan}27.  ${gl_bai}Dockge容器堆栈管理面板              ${gl_kjlan}28.  ${gl_bai}LibreSpeed测速工具"
 	  echo -e "${gl_kjlan}29.  ${gl_bai}searxng聚合搜索站 ${gl_huang}★${gl_bai}                 ${gl_kjlan}30.  ${gl_bai}PhotoPrism私有相册系统"
 	  echo -e "${gl_kjlan}------------------------"
 	  echo -e "${gl_kjlan}31.  ${gl_bai}StirlingPDF工具大全                 ${gl_kjlan}32.  ${gl_bai}drawio免费的在线图表软件 ${gl_huang}★${gl_bai}"
 	  echo -e "${gl_kjlan}33.  ${gl_bai}Sun-Panel导航面板                   ${gl_kjlan}34.  ${gl_bai}Pingvin-Share文件分享平台"
-	  echo -e "${gl_kjlan}35.  ${gl_bai}极简朋友圈                          ${gl_kjlan}36.  ${gl_bai}LobeChatAI 채팅 집계 웹사이트"
+	  echo -e "${gl_kjlan}35.  ${gl_bai}极简朋友圈                          ${gl_kjlan}36.  ${gl_bai}LobeChatAI聊天聚合网站"
 	  echo -e "${gl_kjlan}37.  ${gl_bai}MyIP工具箱 ${gl_huang}★${gl_bai}                        ${gl_kjlan}38.  ${gl_bai}小雅alist全家桶"
 	  echo -e "${gl_kjlan}39.  ${gl_bai}Bililive直播录制工具                ${gl_kjlan}40.  ${gl_bai}webssh网页版SSH连接工具"
 	  echo -e "${gl_kjlan}------------------------"
@@ -10776,15 +10776,15 @@ linux_Settings() {
 	  echo -e "${gl_kjlan}17.  ${gl_bai}防火墙高级管理器                   ${gl_kjlan}18.  ${gl_bai}修改主机名"
 	  echo -e "${gl_kjlan}19.  ${gl_bai}切换系统更新源                     ${gl_kjlan}20.  ${gl_bai}定时任务管理"
 	  echo -e "${gl_kjlan}------------------------"
-	  echo -e "${gl_kjlan}21.  ${gl_bai}기본 호스트 확인${gl_kjlan}22.  ${gl_bai}SSH防御程序"
-	  echo -e "${gl_kjlan}23.  ${gl_bai}限流自动关机                       ${gl_kjlan}24.  ${gl_bai}ROOT 개인 키 로그인 모드"
+	  echo -e "${gl_kjlan}21.  ${gl_bai}本机host解析                       ${gl_kjlan}22.  ${gl_bai}SSH防御程序"
+	  echo -e "${gl_kjlan}23.  ${gl_bai}限流自动关机                       ${gl_kjlan}24.  ${gl_bai}ROOT私钥登录模式"
 	  echo -e "${gl_kjlan}25.  ${gl_bai}TG-bot系统监控预警                 ${gl_kjlan}26.  ${gl_bai}修复OpenSSH高危漏洞（岫源）"
-	  echo -e "${gl_kjlan}27.  ${gl_bai}Red Hat Linux 커널 업그레이드${gl_kjlan}28.  ${gl_bai}Linux 시스템 커널 매개변수 최적화${gl_huang}★${gl_bai}"
-	  echo -e "${gl_kjlan}29.  ${gl_bai}바이러스 검사 도구${gl_huang}★${gl_bai}                     ${gl_kjlan}30.  ${gl_bai}文件管理器"
+	  echo -e "${gl_kjlan}27.  ${gl_bai}红帽系Linux内核升级                ${gl_kjlan}28.  ${gl_bai}Linux系统内核参数优化 ${gl_huang}★${gl_bai}"
+	  echo -e "${gl_kjlan}29.  ${gl_bai}病毒扫描工具 ${gl_huang}★${gl_bai}                     ${gl_kjlan}30.  ${gl_bai}文件管理器"
 	  echo -e "${gl_kjlan}------------------------"
 	  echo -e "${gl_kjlan}31.  ${gl_bai}切换系统语言                       ${gl_kjlan}32.  ${gl_bai}命令行美化工具 ${gl_huang}★${gl_bai}"
-	  echo -e "${gl_kjlan}33.  ${gl_bai}시스템 휴지통 설정${gl_kjlan}34.  ${gl_bai}系统备份与恢复"
-	  echo -e "${gl_kjlan}35.  ${gl_bai}ssh远程连接工具                    ${gl_kjlan}36.  ${gl_bai}하드 디스크 파티션 관리 도구"
+	  echo -e "${gl_kjlan}33.  ${gl_bai}设置系统回收站                     ${gl_kjlan}34.  ${gl_bai}系统备份与恢复"
+	  echo -e "${gl_kjlan}35.  ${gl_bai}ssh远程连接工具                    ${gl_kjlan}36.  ${gl_bai}硬盘分区管理工具"
 	  echo -e "${gl_kjlan}37.  ${gl_bai}命令行历史记录                     ${gl_kjlan}38.  ${gl_bai}rsync远程同步工具"
 	  echo -e "${gl_kjlan}------------------------"
 	  echo -e "${gl_kjlan}41.  ${gl_bai}留言板                             ${gl_kjlan}66.  ${gl_bai}一条龙系统调优 ${gl_huang}★${gl_bai}"
@@ -11624,7 +11624,7 @@ EOF
 			  	  echo "------------------------------------------------"
 			  	  echo "将会生成密钥对，更安全的方式SSH登录"
 				  echo "------------------------"
-				  echo "1. 새 키 생성 2. 기존 키 가져오기 3. 로컬 키 보기"
+				  echo "1. 生成新密钥              2. 导入已有密钥              3. 查看本机密钥"
 				  echo "------------------------"
 				  echo "0. 返回上一级选单"
 				  echo "------------------------"

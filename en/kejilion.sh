@@ -2052,7 +2052,7 @@ web_security() {
 					  send_stats "cloudflare模式"
 					  echo "到cf后台右上角我的个人资料，选择左侧API令牌，获取Global API Key"
 					  echo "https://dash.cloudflare.com/login"
-					  read -e -p "Enter CF’s account number:" cfuser
+					  read -e -p "输入CF的账号: " cfuser
 					  read -e -p "输入CF的Global API Key: " cftoken
 
 					  wget -O /home/web/conf.d/default.conf ${gh_proxy}raw.githubusercontent.com/kejilion/nginx/main/default11.conf
@@ -2073,11 +2073,11 @@ web_security() {
 
 				  22)
 					  send_stats "高负载开启5秒盾"
-					  echo -e "${gl_huang}The website automatically detects every 5 minutes. When it detects high load, it will automatically open the shield, and when it detects low load, it will automatically close the shield for 5 seconds.${gl_bai}"
+					  echo -e "${gl_huang}网站每5分钟自动检测，当达检测到高负载会自动开盾，低负载也会自动关闭5秒盾。${gl_bai}"
 					  echo "--------------"
-					  echo "Get CF parameters:"
+					  echo "获取CF参数: "
 					  echo -e "到cf后台右上角我的个人资料，选择左侧API令牌，获取${gl_huang}Global API Key${gl_bai}"
-					  echo -e "Go to the bottom right of the cf backend domain name summary page to get it${gl_huang}Area ID${gl_bai}"
+					  echo -e "到cf后台域名概要页面右下方获取${gl_huang}区域ID${gl_bai}"
 					  echo "https://dash.cloudflare.com/login"
 					  echo "--------------"
 					  read -e -p "输入CF的账号: " cfuser
@@ -2108,13 +2108,13 @@ web_security() {
 
 				  31)
 					  nginx_waf on
-					  echo "Site WAF is enabled"
+					  echo "站点WAF已开启"
 					  send_stats "站点WAF已开启"
 					  ;;
 
 				  32)
 				  	  nginx_waf off
-					  echo "Site WAF is down"
+					  echo "站点WAF已关闭"
 					  send_stats "站点WAF已关闭"
 					  ;;
 
@@ -2193,13 +2193,13 @@ web_optimization() {
 			  send_stats "优化LDNMP环境"
 			  echo -e "优化LDNMP环境${gl_lv}${mode_info}${gzip_status}${br_status}${zstd_status}${gl_bai}"
 			  echo "------------------------"
-			  echo "1. Standard mode 2. High performance mode (2H4G or above recommended)"
+			  echo "1. 标准模式              2. 高性能模式 (推荐2H4G以上)"
 			  echo "------------------------"
 			  echo "3. 开启gzip压缩          4. 关闭gzip压缩"
-			  echo "5. Turn on br compression 6. Turn off br compression"
-			  echo "7. Turn on zstd compression 8. Turn off zstd compression"
+			  echo "5. 开启br压缩            6. 关闭br压缩"
+			  echo "7. 开启zstd压缩          8. 关闭zstd压缩"
 			  echo "------------------------"
-			  echo "0. Return to the previous menu"
+			  echo "0. 返回上一级选单"
 			  echo "------------------------"
 			  read -e -p "请输入你的选择: " sub_choice
 			  case $sub_choice in
@@ -2246,7 +2246,7 @@ web_optimization() {
 				  2)
 				  send_stats "站点高性能模式"
 
-				  # nginx tuning
+				  # nginx调优
 				  sed -i 's/worker_connections.*/worker_connections 20480;/' /home/web/nginx.conf
 				  sed -i 's/worker_processes.*/worker_processes 8;/' /home/web/nginx.conf
 
@@ -2467,7 +2467,7 @@ block_container_port() {
 	fi
 
 
-	echo "IP+port has been blocked from accessing the service"
+	echo "已阻止IP+端口访问该服务"
 	save_iptables_rules
 }
 
@@ -3318,7 +3318,7 @@ ldnmp_web_status() {
 		echo "7.  编辑全局配置                    8.  编辑站点配置"
 		echo "9.  管理站点数据库		    10. 查看站点分析报告"
 		echo "------------------------"
-		echo "20. Delete specified site data"
+		echo "20. 删除指定站点数据"
 		echo "------------------------"
 		echo "0. 返回上一级选单"
 		echo "------------------------"
@@ -3845,7 +3845,7 @@ frps_panel() {
 				block_host_port "$frps_port" "$ipv4_address"
 				;;
 			6)
-				echo "Domain name format example.com without https://"
+				echo "域名格式 example.com 不带https://"
 				web_del
 				;;
 
@@ -3969,7 +3969,7 @@ yt_menu_pro() {
 		fi
 
 		clear
-		send_stats "yt-dlp download tool"
+		send_stats "yt-dlp 下载工具"
 		echo -e "yt-dlp $YTDLP_STATUS"
 		echo -e "yt-dlp 是一个功能强大的视频下载工具，支持 YouTube、Bilibili、Twitter 等数千站点。"
 		echo -e "官网地址：https://github.com/yt-dlp/yt-dlp"
@@ -3977,12 +3977,12 @@ yt_menu_pro() {
 		echo "已下载视频列表:"
 		ls -td "$VIDEO_DIR"/*/ 2>/dev/null || echo "（暂无）"
 		echo "-------------------------"
-		echo "1. Install 2. Update 3. Uninstall"
+		echo "1.  安装               2.  更新               3.  卸载"
 		echo "-------------------------"
 		echo "5.  单个视频下载       6.  批量视频下载       7.  自定义参数下载"
 		echo "8.  下载为MP3音频      9.  删除视频目录       10. Cookie管理（开发中）"
 		echo "-------------------------"
-		echo "0. Return to the previous menu"
+		echo "0. 返回上一级选单"
 		echo "-------------------------"
 		read -e -p "请输入选项编号: " choice
 
@@ -3993,19 +3993,19 @@ yt_menu_pro() {
 				install ffmpeg
 				sudo curl -L https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp -o /usr/local/bin/yt-dlp
 				sudo chmod a+rx /usr/local/bin/yt-dlp
-				echo "The installation is complete. Press any key to continue..."
+				echo "安装完成。按任意键继续..."
 				read ;;
 			2)
-				send_stats "Updating yt-dlp..."
-				echo "Updating yt-dlp..."
+				send_stats "正在更新 yt-dlp..."
+				echo "正在更新 yt-dlp..."
 				sudo yt-dlp -U
-				echo "Update completed. Press any key to continue..."
+				echo "更新完成。按任意键继续..."
 				read ;;
 			3)
 				send_stats "正在卸载 yt-dlp..."
 				echo "正在卸载 yt-dlp..."
 				sudo rm -f /usr/local/bin/yt-dlp
-				echo "Uninstallation completed. Press any key to continue..."
+				echo "卸载完成。按任意键继续..."
 				read ;;
 			5)
 				send_stats "单个视频下载"
@@ -4016,12 +4016,12 @@ yt_menu_pro() {
 					--write-info-json \
 					-o "$VIDEO_DIR/%(title)s/%(title)s.%(ext)s" \
 					--no-overwrites --no-post-overwrites "$url"
-				read -e -p "Download completed, press any key to continue..." ;;
+				read -e -p "下载完成，按任意键继续..." ;;
 			6)
 				send_stats "批量视频下载"
 				install nano
 				if [ ! -f "$URL_FILE" ]; then
-				  echo -e "# Enter multiple video link addresses\n# https://www.bilibili.com/bangumi/play/ep733316?spm_id_from=333.337.0.0&from_spmid=666.25.episode.0" > "$URL_FILE"
+				  echo -e "# 输入多个视频链接地址\n# https://www.bilibili.com/bangumi/play/ep733316?spm_id_from=333.337.0.0&from_spmid=666.25.episode.0" > "$URL_FILE"
 				fi
 				nano $URL_FILE
 				echo "现在开始批量下载..."
@@ -4032,20 +4032,20 @@ yt_menu_pro() {
 					-a "$URL_FILE" \
 					-o "$VIDEO_DIR/%(title)s/%(title)s.%(ext)s" \
 					--no-overwrites --no-post-overwrites
-				read -e -p "Batch download completed, press any key to continue..." ;;
+				read -e -p "批量下载完成，按任意键继续..." ;;
 			7)
 				send_stats "自定义视频下载"
-				read -e -p "Please enter the complete yt-dlp parameters (excluding yt-dlp):" custom
+				read -e -p "请输入完整 yt-dlp 参数（不含 yt-dlp）: " custom
 				yt-dlp -P "$VIDEO_DIR" $custom \
 					--write-subs --sub-langs all \
 					--write-thumbnail --embed-thumbnail \
 					--write-info-json \
 					-o "$VIDEO_DIR/%(title)s/%(title)s.%(ext)s" \
 					--no-overwrites --no-post-overwrites
-				read -e -p "Execution completed, press any key to continue..." ;;
+				read -e -p "执行完成，按任意键继续..." ;;
 			8)
 				send_stats "MP3下载"
-				read -e -p "Please enter video link:" url
+				read -e -p "请输入视频链接: " url
 				yt-dlp -P "$VIDEO_DIR" -x --audio-format mp3 \
 					--write-subs --sub-langs all \
 					--write-thumbnail --embed-thumbnail \
@@ -4055,8 +4055,8 @@ yt_menu_pro() {
 				read -e -p "音频下载完成，按任意键继续..." ;;
 
 			9)
-				send_stats "Delete video"
-				read -e -p "Please enter the name of the deleted video:" rmdir
+				send_stats "删除视频"
+				read -e -p "请输入删除视频名称: " rmdir
 				rm -rf "$VIDEO_DIR/$rmdir"
 				;;
 			*)
@@ -4101,7 +4101,7 @@ fix_dpkg() {
 
 
 linux_update() {
-	echo -e "${gl_huang}System update in progress...${gl_bai}"
+	echo -e "${gl_huang}正在系统更新...${gl_bai}"
 	if command -v dnf &>/dev/null; then
 		dnf -y update
 	elif command -v yum &>/dev/null; then
@@ -4128,7 +4128,7 @@ linux_update() {
 
 
 linux_clean() {
-	echo -e "${gl_huang}System cleaning in progress...${gl_bai}"
+	echo -e "${gl_huang}正在系统清理...${gl_bai}"
 	if command -v dnf &>/dev/null; then
 		rpm --rebuilddb
 		dnf autoremove -y
@@ -4157,13 +4157,13 @@ linux_clean() {
 		journalctl --vacuum-size=500M
 
 	elif command -v apk &>/dev/null; then
-		echo "Clean package manager cache..."
+		echo "清理包管理器缓存..."
 		apk cache clean
 		echo "删除系统日志..."
 		rm -rf /var/log/*
-		echo "Delete APK cache..."
+		echo "删除APK缓存..."
 		rm -rf /var/cache/apk/*
-		echo "Delete temporary files..."
+		echo "删除临时文件..."
 		rm -rf /tmp/*
 
 	elif command -v pacman &>/dev/null; then
@@ -4181,9 +4181,9 @@ linux_clean() {
 		journalctl --vacuum-size=500M
 
 	elif command -v opkg &>/dev/null; then
-		echo "Delete system log..."
+		echo "删除系统日志..."
 		rm -rf /var/log/*
-		echo "Delete temporary files..."
+		echo "删除临时文件..."
 		rm -rf /tmp/*
 
 	elif command -v pkg &>/dev/null; then
@@ -4191,13 +4191,13 @@ linux_clean() {
 		pkg autoremove -y
 		echo "清理包管理器缓存..."
 		pkg clean -y
-		echo "Delete system log..."
+		echo "删除系统日志..."
 		rm -rf /var/log/*
 		echo "删除临时文件..."
 		rm -rf /tmp/*
 
 	else
-		echo "Unknown package manager!"
+		echo "未知的包管理器!"
 		return
 	fi
 	return
@@ -4237,16 +4237,16 @@ fi
 
 set_dns_ui() {
 root_use
-send_stats "Optimize DNS"
+send_stats "优化DNS"
 while true; do
 	clear
-	echo "Optimize DNS address"
+	echo "优化DNS地址"
 	echo "------------------------"
 	echo "当前DNS地址"
 	cat /etc/resolv.conf
 	echo "------------------------"
 	echo ""
-	echo "1. Foreign DNS optimization:"
+	echo "1. 国外DNS优化: "
 	echo " v4: 1.1.1.1 8.8.8.8"
 	echo " v6: 2606:4700:4700::1111 2001:4860:4860::8888"
 	echo "2. 国内DNS优化: "
@@ -4451,7 +4451,7 @@ dd_xitong() {
 		}
 
 		dd_xitong_3() {
-		  echo -e "Initial username after reinstallation:${gl_huang}root${gl_bai}  初始密码: ${gl_huang}123@@@${gl_bai}Initial port:${gl_huang}22${gl_bai}"
+		  echo -e "重装后初始用户名: ${gl_huang}root${gl_bai}  初始密码: ${gl_huang}123@@@${gl_bai}  初始端口: ${gl_huang}22${gl_bai}"
 		  echo -e "按任意键继续..."
 		  read -n 1 -s -r -p ""
 		  dd_xitong_bin456789
@@ -4459,7 +4459,7 @@ dd_xitong() {
 
 		dd_xitong_4() {
 		  echo -e "重装后初始用户名: ${gl_huang}Administrator${gl_bai}  初始密码: ${gl_huang}123@@@${gl_bai}  初始端口: ${gl_huang}3389${gl_bai}"
-		  echo -e "Press any key to continue..."
+		  echo -e "按任意键继续..."
 		  read -n 1 -s -r -p ""
 		  dd_xitong_bin456789
 		}
@@ -4468,7 +4468,7 @@ dd_xitong() {
 			root_use
 			echo "重装系统"
 			echo "--------------------------------"
-			echo -e "${gl_hong}Notice:${gl_bai}重装有风险失联，不放心者慎用。重装预计花费15分钟，请提前备份数据。"
+			echo -e "${gl_hong}注意: ${gl_bai}重装有风险失联，不放心者慎用。重装预计花费15分钟，请提前备份数据。"
 			echo -e "${gl_hui}感谢MollyLau大佬和bin456789大佬的脚本支持！${gl_bai} "
 			echo "------------------------"
 			echo "1. Debian 12                  2. Debian 11"
@@ -4497,14 +4497,14 @@ dd_xitong() {
 			read -e -p "请选择要重装的系统: " sys_choice
 			case "$sys_choice" in
 			  1)
-				send_stats "Reinstall debian 12"
+				send_stats "重装debian 12"
 				dd_xitong_1
 				bash InstallNET.sh -debian 12
 				reboot
 				exit
 				;;
 			  2)
-				send_stats "Reinstall debian 11"
+				send_stats "重装debian 11"
 				dd_xitong_1
 				bash InstallNET.sh -debian 11
 				reboot
@@ -4518,7 +4518,7 @@ dd_xitong() {
 				exit
 				;;
 			  4)
-				send_stats "Reinstall debian 9"
+				send_stats "重装debian 9"
 				dd_xitong_1
 				bash InstallNET.sh -debian 9
 				reboot
@@ -4603,7 +4603,7 @@ dd_xitong() {
 				;;
 
 			  27)
-				send_stats "Reinstall fedora42"
+				send_stats "重装fedora42"
 				dd_xitong_3
 				bash reinstall.sh fedora
 				reboot
@@ -6038,7 +6038,7 @@ disk_manager() {
 			5) check_partition ;;
 			*) break ;;
 		esac
-		read -e -p "Press Enter to continue..."
+		read -e -p "按回车键继续..."
 	done
 }
 
@@ -6448,21 +6448,21 @@ linux_tools() {
 	  echo -e "${gl_kjlan}------------------------"
 	  echo -e "${gl_kjlan}11.  ${gl_bai}btop 现代化监控工具 ${gl_huang}★${gl_bai}             ${gl_kjlan}12.  ${gl_bai}ranger 文件管理工具"
 	  echo -e "${gl_kjlan}13.  ${gl_bai}ncdu 磁盘占用查看工具             ${gl_kjlan}14.  ${gl_bai}fzf 全局搜索工具"
-	  echo -e "${gl_kjlan}15.  ${gl_bai}vim 文本编辑器                    ${gl_kjlan}16.  ${gl_bai}nano text editor${gl_huang}★${gl_bai}"
+	  echo -e "${gl_kjlan}15.  ${gl_bai}vim 文本编辑器                    ${gl_kjlan}16.  ${gl_bai}nano 文本编辑器 ${gl_huang}★${gl_bai}"
 	  echo -e "${gl_kjlan}17.  ${gl_bai}git 版本控制系统"
 	  echo -e "${gl_kjlan}------------------------"
-	  echo -e "${gl_kjlan}21.  ${gl_bai}The Matrix Screensaver${gl_kjlan}22.  ${gl_bai}跑火车屏保"
-	  echo -e "${gl_kjlan}26.  ${gl_bai}Tetris mini game${gl_kjlan}27.  ${gl_bai}贪吃蛇小游戏"
+	  echo -e "${gl_kjlan}21.  ${gl_bai}黑客帝国屏保                      ${gl_kjlan}22.  ${gl_bai}跑火车屏保"
+	  echo -e "${gl_kjlan}26.  ${gl_bai}俄罗斯方块小游戏                  ${gl_kjlan}27.  ${gl_bai}贪吃蛇小游戏"
 	  echo -e "${gl_kjlan}28.  ${gl_bai}太空入侵者小游戏"
 	  echo -e "${gl_kjlan}------------------------"
-	  echo -e "${gl_kjlan}31.  ${gl_bai}Install all${gl_kjlan}32.  ${gl_bai}全部安装（不含屏保和游戏）${gl_huang}★${gl_bai}"
+	  echo -e "${gl_kjlan}31.  ${gl_bai}全部安装                          ${gl_kjlan}32.  ${gl_bai}全部安装（不含屏保和游戏）${gl_huang}★${gl_bai}"
 	  echo -e "${gl_kjlan}33.  ${gl_bai}全部卸载"
 	  echo -e "${gl_kjlan}------------------------"
 	  echo -e "${gl_kjlan}41.  ${gl_bai}安装指定工具                      ${gl_kjlan}42.  ${gl_bai}卸载指定工具"
 	  echo -e "${gl_kjlan}------------------------"
 	  echo -e "${gl_kjlan}0.   ${gl_bai}返回主菜单"
 	  echo -e "${gl_kjlan}------------------------${gl_bai}"
-	  read -e -p "Please enter your choice:" sub_choice
+	  read -e -p "请输入你的选择: " sub_choice
 
 	  case $sub_choice in
 		  1)
@@ -6477,7 +6477,7 @@ linux_tools() {
 			  clear
 			  install wget
 			  clear
-			  echo "The tool has been installed and is used as follows:"
+			  echo "工具已安装，使用方法如下："
 			  wget --help
 			  send_stats "安装wget"
 			  ;;
@@ -6502,7 +6502,7 @@ linux_tools() {
 			  install htop
 			  clear
 			  htop
-			  send_stats "Install htop"
+			  send_stats "安装htop"
 			  ;;
 			6)
 			  clear
@@ -6515,15 +6515,15 @@ linux_tools() {
 			  clear
 			  install unzip
 			  clear
-			  echo "The tool has been installed and is used as follows:"
+			  echo "工具已安装，使用方法如下："
 			  unzip
-			  send_stats "installunzip"
+			  send_stats "安装unzip"
 			  ;;
 			8)
 			  clear
 			  install tar
 			  clear
-			  echo "The tool has been installed and is used as follows:"
+			  echo "工具已安装，使用方法如下："
 			  tar --help
 			  send_stats "安装tar"
 			  ;;
@@ -8374,12 +8374,12 @@ linux_panel() {
 	  echo -e "${gl_kjlan}------------------------"
 	  echo -e "${gl_kjlan}41.  ${gl_bai}耗子管理面板                	 ${gl_kjlan}42.  ${gl_bai}Nexterm远程连接工具"
 	  echo -e "${gl_kjlan}43.  ${gl_bai}RustDesk远程桌面(服务端) ${gl_huang}★${gl_bai}          ${gl_kjlan}44.  ${gl_bai}RustDesk远程桌面(中继端) ${gl_huang}★${gl_bai}"
-	  echo -e "${gl_kjlan}45.  ${gl_bai}Docker加速站            		 ${gl_kjlan}46.  ${gl_bai}GitHub acceleration station${gl_huang}★${gl_bai}"
-	  echo -e "${gl_kjlan}47.  ${gl_bai}普罗米修斯监控			 ${gl_kjlan}48.  ${gl_bai}Prometheus (host monitoring)"
+	  echo -e "${gl_kjlan}45.  ${gl_bai}Docker加速站            		 ${gl_kjlan}46.  ${gl_bai}GitHub加速站 ${gl_huang}★${gl_bai}"
+	  echo -e "${gl_kjlan}47.  ${gl_bai}普罗米修斯监控			 ${gl_kjlan}48.  ${gl_bai}普罗米修斯(主机监控)"
 	  echo -e "${gl_kjlan}49.  ${gl_bai}普罗米修斯(容器监控)		 ${gl_kjlan}50.  ${gl_bai}补货监控工具"
 	  echo -e "${gl_kjlan}------------------------"
-	  echo -e "${gl_kjlan}51.  ${gl_bai}PVE open chick panel${gl_kjlan}52.  ${gl_bai}DPanel容器管理面板"
-	  echo -e "${gl_kjlan}53.  ${gl_bai}llama3聊天AI大模型                  ${gl_kjlan}54.  ${gl_bai}AMH host website building management panel"
+	  echo -e "${gl_kjlan}51.  ${gl_bai}PVE开小鸡面板			 ${gl_kjlan}52.  ${gl_bai}DPanel容器管理面板"
+	  echo -e "${gl_kjlan}53.  ${gl_bai}llama3聊天AI大模型                  ${gl_kjlan}54.  ${gl_bai}AMH主机建站管理面板"
 	  echo -e "${gl_kjlan}55.  ${gl_bai}FRP内网穿透(服务端) ${gl_huang}★${gl_bai}	         ${gl_kjlan}56.  ${gl_bai}FRP内网穿透(客户端) ${gl_huang}★${gl_bai}"
 	  echo -e "${gl_kjlan}57.  ${gl_bai}Deepseek聊天AI大模型                ${gl_kjlan}58.  ${gl_bai}Dify大模型知识库 ${gl_huang}★${gl_bai}"
 	  echo -e "${gl_kjlan}59.  ${gl_bai}NewAPI大模型资产管理                ${gl_kjlan}60.  ${gl_bai}JumpServer开源堡垒机"
@@ -8390,7 +8390,7 @@ linux_panel() {
 	  echo -e "${gl_kjlan}67.  ${gl_bai}ddns-go动态DNS管理工具 ${gl_huang}★${gl_bai}            ${gl_kjlan}68.  ${gl_bai}AllinSSL证书管理平台"
 	  echo -e "${gl_kjlan}69.  ${gl_bai}SFTPGo文件传输工具                  ${gl_kjlan}70.  ${gl_bai}AstrBot聊天机器人框架"
 	  echo -e "${gl_kjlan}------------------------"
-	  echo -e "${gl_kjlan}71.  ${gl_bai}Navidrome private music server${gl_kjlan}72.  ${gl_bai}bitwarden密码管理器 ${gl_huang}★${gl_bai}"
+	  echo -e "${gl_kjlan}71.  ${gl_bai}Navidrome私有音乐服务器             ${gl_kjlan}72.  ${gl_bai}bitwarden密码管理器 ${gl_huang}★${gl_bai}"
 	  echo -e "${gl_kjlan}73.  ${gl_bai}LibreTV私有影视                     ${gl_kjlan}74.  ${gl_bai}MoonTV私有影视"
 	  echo -e "${gl_kjlan}75.  ${gl_bai}Melody音乐精灵                      ${gl_kjlan}76.  ${gl_bai}在线DOS老游戏"
 	  echo -e "${gl_kjlan}77.  ${gl_bai}迅雷离线下载工具                    ${gl_kjlan}78.  ${gl_bai}PandaWiki智能文档管理系统"

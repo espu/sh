@@ -1487,12 +1487,12 @@ certs_status() {
 		echo -e "1. 域名拼写错误 ➠ 请检查域名输入是否正确"
 		echo -e "2. DNS解析问题 ➠ 确认域名已正确解析到本服务器IP"
 		echo -e "3. 网络配置问题 ➠ 如使用Cloudflare Warp等虚拟网络请暂时关闭"
-		echo -e "4. ファイアウォールの制限 ➠ ポート 80/443 が開いているかどうかを確認し、アクセス可能であることを確認します。"
+		echo -e "4. 防火墙限制 ➠ 检查80/443端口是否开放，确保验证可访问"
 		echo -e "5. 申请次数超限 ➠ Let's Encrypt有每周限额(5次/域名/周)"
 		echo -e "6. 国内备案限制 ➠ 中国大陆环境请确认域名是否备案"
 		break_end
 		clear
-		echo "もう一度デプロイしてみてください$webname"
+		echo "请再次尝试部署 $webname"
 		add_yuming
 		install_ssltls
 		certs_status
@@ -1503,7 +1503,7 @@ certs_status() {
 
 repeat_add_yuming() {
 if [ -e /home/web/conf.d/$yuming.conf ]; then
-  send_stats "ドメイン名の再利用"
+  send_stats "域名重复使用"
   web_del "${yuming}" > /dev/null 2>&1
 fi
 
@@ -1512,7 +1512,7 @@ fi
 
 add_yuming() {
 	  ip_address
-	  echo -e "まず、ドメイン名をローカル IP に解決します。${gl_huang}$ipv4_address  $ipv6_address${gl_bai}"
+	  echo -e "先将域名解析到本机IP: ${gl_huang}$ipv4_address  $ipv6_address${gl_bai}"
 	  read -e -p "请输入你的IP或者解析过的域名: " yuming
 }
 
@@ -1577,7 +1577,7 @@ nginx_upgrade() {
   docker exec nginx chown -R nginx:nginx /var/cache/nginx/fastcgi
   docker restart $ldnmp_pods > /dev/null 2>&1
 
-  send_stats "更新する$ldnmp_pods"
+  send_stats "更新$ldnmp_pods"
   echo "更新${ldnmp_pods}完成"
 
 }
@@ -1597,11 +1597,11 @@ phpmyadmin_upgrade() {
   ip_address
 
   check_docker_app_ip
-  echo "ログイン情報:"
+  echo "登录信息: "
   echo "用户名: $dbuse"
-  echo "パスワード：$dbusepasswd"
+  echo "密码: $dbusepasswd"
   echo
-  send_stats "起動する$ldnmp_pods"
+  send_stats "启动$ldnmp_pods"
 }
 
 
@@ -1613,7 +1613,7 @@ cf_purge_cache() {
 
   # 检查配置文件是否存在
   if [ -f "$CONFIG_FILE" ]; then
-	# 構成ファイルから API_TOKEN とzone_idを読み取ります
+	# 从配置文件读取 API_TOKEN 和 zone_id
 	read API_TOKEN EMAIL ZONE_IDS < "$CONFIG_FILE"
 	# 将 ZONE_IDS 转换为数组
 	ZONE_IDS=($ZONE_IDS)
@@ -1696,7 +1696,7 @@ nginx_waf() {
 
 	# 根据 mode 参数来决定开启或关闭 WAF
 	if [ "$mode" == "on" ]; then
-		# WAF をオンにする: コメントを削除する
+		# 开启 WAF：去掉注释
 		sed -i 's|# load_module /etc/nginx/modules/ngx_http_modsecurity_module.so;|load_module /etc/nginx/modules/ngx_http_modsecurity_module.so;|' /home/web/nginx.conf > /dev/null 2>&1
 		sed -i 's|^\(\s*\)# modsecurity on;|\1modsecurity on;|' /home/web/nginx.conf > /dev/null 2>&1
 		sed -i 's|^\(\s*\)# modsecurity_rules_file /etc/nginx/modsec/modsecurity.conf;|\1modsecurity_rules_file /etc/nginx/modsec/modsecurity.conf;|' /home/web/nginx.conf > /dev/null 2>&1
@@ -1944,7 +1944,7 @@ nginx_gzip() {
 
 
 web_security() {
-	  send_stats "LDNMP環境防御"
+	  send_stats "LDNMP环境防御"
 	  while true; do
 		check_waf_status
 		check_cf_mode
